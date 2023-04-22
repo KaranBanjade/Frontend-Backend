@@ -14,6 +14,7 @@ const SidebarComponent = (props) => {
                 <li className="list-item">
                         <i className="fas fa-address-book"></i>
                         <span>Models</span>
+                        <ul>
                         {
                     props.models&&props.models.length>0&&props.models.map((value,key)=>{
                         if (value.length>0 )
@@ -26,6 +27,7 @@ const SidebarComponent = (props) => {
                         )
                     })
                 }
+                </ul>
                 </li>
             </ul>
         </div>
