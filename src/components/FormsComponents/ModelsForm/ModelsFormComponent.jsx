@@ -10,7 +10,6 @@ const ModelsFormComponent = (props) => {
         console.log(models)
         props.setModel(models)
     }, [models])
-    // console.log(models);
     return (
         <>
             <h1>Models Settings</h1>
