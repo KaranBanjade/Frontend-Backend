@@ -1,10 +1,17 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import TableFormComponent from '../../TableFormComponent/TableFormComponent';
+import AddRow from '../../Functions/TableFunctions';
 const SingleModelFieldsFormComponent = (props) => {
     const models = props?.models;
     const setModels = props?.setModels;
     const index = props?.index;
     const [model, setModel] = useState("");
+    const [counter, setCounter] = useState(0);
+    let id = '1';
+    const [inputFields, setInputFields] = useState({});
+    useEffect(() => {
+        console.log(inputFields)
+    }, [inputFields]);
     // props.models
     // props.setModels
     // push into models
@@ -48,14 +55,33 @@ const SingleModelFieldsFormComponent = (props) => {
                                 <th>Default</th>
                             </tr>
 
-                            {
+                            {/* {   
                                 (models&&models.length>0)
                                 ?
-                                <TableFormComponent setModels = {setModels} />
+                                <TableFormComponent setModels = {setModels} setCounter = {setCounter}/>
                                 :
-                                <TableFormComponent setModels={setModels}/>
-                            }
+                                <TableFormComponent setModels={setModels} setCounter = {setCounter}/>
+                            } */}
                         </thead>
+                        <tbody>
+                            {
+                                Object.values(inputFields).map((inputField) => {
+                                    return inputField;
+                                })
+                            }
+
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colSpan="5">
+                                    <button onClick={(e) => {
+                                        e.preventDefault();
+                                        setCounter((prev) => prev + 1);
+                                        AddRow(inputFields,setInputFields, counter, setCounter, setModels, TableFormComponent);
+                                    }}>Add Field</button>
+                                </td>
+                            </tr>
+                        </tfoot>
                     </table>
                 </div>
             </form>

@@ -1,6 +1,6 @@
 import React from "react";
 import { useEffect, useState} from "react";
-
+import AddRow  from "../Functions/TableFunctions";
 const TableFormComponent = (props) => {
     /*
    fieldsObject :{
@@ -12,9 +12,9 @@ const TableFormComponent = (props) => {
             }
         }
     */
-
+    const id = props?.id;
     const setModels = props?.setModels;
-    const [fields, setFields] = useState({});
+    const [fields, setFields] = useState([]);
     
     const [currentField, setCurrentField] = useState("");
     return (
@@ -106,13 +106,10 @@ const TableFormComponent = (props) => {
                     }} />
                 </td>
                 <td>
-                    <button onClick={(e) => {
+                    <button id = {id} onClick={(e) => {
+                        props.setCounter((prev) => prev - 1);
                         e.preventDefault();
-                        const obj = {
-                            name: currentField,
-                            
-                        }
-                    }}>+</button>
+                    }}>-</button>
                 </td>
             </tr>
         </>
