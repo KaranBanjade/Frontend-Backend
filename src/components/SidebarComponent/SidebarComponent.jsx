@@ -1,5 +1,4 @@
 const SidebarComponent = (props) => {
-    console.log(props.models)
     return (
         <div className="sidebar">
             <ul className="list">

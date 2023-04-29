@@ -7,7 +7,6 @@ const ModelsFormComponent = (props) => {
         }
     },[])
     useEffect(() => {
-        console.log(models)
         props.setModel(models)
     }, [models])
     return (

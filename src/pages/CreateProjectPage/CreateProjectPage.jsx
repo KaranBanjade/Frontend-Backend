@@ -3,35 +3,50 @@ import "./CreateProjectPage.css";
 import Components from "../../components";
 import SidebarComponent from "../../components/SidebarComponent/SidebarComponent";
 const { BeginFormComponent, DatabaseFormComponent,ModelsFormComponent,SingleModelFieldsFormComponent } = Components;
+// {
+//     "connObj": {
+//       "name": "hackaminer",
+//       "user": "facproadmin",
+//       "pass": "#facproRDS2022#",
+//       "host": "database-1.czb0dk8ckwzf.us-east-1.rds.amazonaws.com"
+//     },
+//     "models": [
+//       {
+//         "name": "Hospital",
+//         "fieldsObject": {
+//           "id": {
+//             "type": "UUID",
+//             "allowNull": "false",
+//             "primaryKey": "true",
+//             "defaultValue": "UUIDV4"
+//           },
+//           "name": {
+//             "type": "STRING",
+//             "allowNull": "false",
+//             "primaryKey": "false",
+//             "defaultValue": ""
+//           }
+//         }
+//       }
+//     ]
+//   }
 
 const CreateProjectPage = () => {
     const [counter, setCounter] = useState(0);
-    const [model, setModel] = useState([]);
-    // const [fieldsLength, setFieldsLength] = useState(0);
-    
+    const [models, setModels] = useState([]);
+
     let FormsArray = {
         0: <BeginFormComponent />,
         1: <DatabaseFormComponent />,
-        2: <ModelsFormComponent setModel = {setModel} model = {model}/>,
-        3: <SingleModelFieldsFormComponent model = {model} setModel = {setModel}/>
+        2: <SingleModelFieldsFormComponent models = {models} setModels = {setModels} index = {0}/>,
     }
-    // useEffect(() => {
-    //     if(model.length!=fieldsLength){
-    //         setFieldsLength(model.length);
-    //     }
-    //     const fieldsObject = {}
-    //     model.map((value,key)=>{
-    //         fieldsObject.push(<SingleModelFieldsFormComponent model = {value}/>);
-    //     })
-    //     FormsArray[3] = fieldsObject;
-    // }, [model])
 
-    useEffect(() => {}, [counter, model])
+    useEffect(() => {}, [counter, models])
 
     return (
         <>
         <div className="create-content">
-            <SidebarComponent className = "sidebar" models = {model}/>
+            <SidebarComponent className = "sidebar" models = {models}/>
             <div>
             {
                 FormsArray[counter]
