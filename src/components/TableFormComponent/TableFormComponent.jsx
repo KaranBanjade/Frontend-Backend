@@ -1,6 +1,7 @@
 import React from "react";
 import { useEffect, useState} from "react";
-import AddRow  from "../Functions/TableFunctions";
+import TableFunctions  from "../Functions/TableFunctions";
+const {AddRow, RemoveRow} = TableFunctions;
 const TableFormComponent = (props) => {
     /*
    fieldsObject :{
@@ -15,7 +16,7 @@ const TableFormComponent = (props) => {
     const id = props?.id;
     const setModels = props?.setModels;
     const [fields, setFields] = useState([]);
-    
+    const setInputFields = props?.setInputFields;
     const [currentField, setCurrentField] = useState("");
     return (
         <>
@@ -107,7 +108,8 @@ const TableFormComponent = (props) => {
                 </td>
                 <td>
                     <button id = {id} onClick={(e) => {
-                        props.setCounter((prev) => prev - 1);
+                        // props.setCounter((prev) => prev - 1);
+                        RemoveRow(setInputFields, id)
                         e.preventDefault();
                     }}>-</button>
                 </td>

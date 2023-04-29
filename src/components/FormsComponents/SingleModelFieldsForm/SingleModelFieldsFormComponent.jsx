@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import TableFormComponent from '../../TableFormComponent/TableFormComponent';
-import AddRow from '../../Functions/TableFunctions';
+import TableFunctions from '../../Functions/TableFunctions';
+const { AddRow, RemoveRow } = TableFunctions;
 const SingleModelFieldsFormComponent = (props) => {
     const models = props?.models;
     const setModels = props?.setModels;
