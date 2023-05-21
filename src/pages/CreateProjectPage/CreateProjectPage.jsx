@@ -35,23 +35,40 @@ const CreateProjectPage = () => {
     const [counter, setCounter] = useState(0);
     const [models, setModels] = useState([]);
 
-    let FormsArray = {
-        0: <BeginFormComponent />,
-        1: <DatabaseFormComponent />,
-        2: <SingleModelFieldsFormComponent models = {models} setModels = {setModels} index = {0}/>,
-    }
+    let FormsArray = [
+        <BeginFormComponent />,
+        <DatabaseFormComponent />,
+        <SingleModelFieldsFormComponent models = {models} setModels = {setModels} index = {0}/>
+    ]
 
-    useEffect(() => {}, [counter, models])
+    useEffect(() => {
+
+    }, [models,FormsArray])
+
+    useEffect(() => {
+        // console.log(FormsArray)
+        if(counter == FormsArray.length - 1)
+            FormsArray.push(<SingleModelFieldsFormComponent model = {models} setModel = {setModels}  index = {counter} />)
+    }, [counter])
 
     return (
         <>
         <div className="create-content">
             <SidebarComponent className = "sidebar" models = {models}/>
             <div>
+                {
+                    <>
+                    <h1>counter {counter}</h1>
+                    <h1>Size {FormsArray.length}</h1>
+                    </>
+                }
             {
                 FormsArray[counter]
             }
-            <button onClick={() => setCounter(counter + 1)}>Next</button>
+            <button onClick={() => {
+                // setCounter(counter + 1);                
+                setCounter(counter + 1);
+                }}>Next</button>
             {counter>0&&<button onClick={() => setCounter(counter - 1)}>Back</button>}
             </div>
         </div>
