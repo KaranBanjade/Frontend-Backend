@@ -1,57 +1,27 @@
-import React from "react";
-import { useEffect, useState} from "react";
-import TableFunctions  from "../Functions/TableFunctions";
-const {AddRow, RemoveRow} = TableFunctions;
-const TableFormComponent = (props) => {
-    /*
-   fieldsObject :{
-            name:{
-                type : "",
-                required : false,
-                unique : false,
-                default : ""
-            }
-        }
-    */
-    const id = props?.id;
-    const setModels = props?.setModels;
-    const [fields, setFields] = useState([]);
-    const setInputFields = props?.setInputFields;
-    const [currentField, setCurrentField] = useState("");
+const React = require('react');
+const { useState, useEffect } = require('react');
+
+const TabelFormComponent = (props) => {
+    const fields = props.fields;
+    const setFields = props.setFields;
+    const fieldChangeHandler = (e, key) => {
+        let data = [...fields];
+        const type = e.target.type;
+        // console.log(type)
+        // console.log(key, e.target.name, e.target.value)
+        data[key][e.target.name] = type != "checkbox"?e.target.value:e.target.checked;
+        setFields(data);
+    }
+    const value = props.value;
+    const key = props.index;
     return (
         <>
             <tr>
                 <td>
-                    <input type="text" 
-                    // value={fieldName?fieldName:'' }   
-                    onChange={(e) => {
-                        setFields({
-                            [e.target.value]: {
-                                type: "",
-                                required: false,
-                                unique: false,
-                                default: ""
-                            }
-                        }
-                        )
-                        setCurrentField(e.target.value);
-                    }} />
+                    <input name = "name" type="text" value={value.name} onChange={(e) => { fieldChangeHandler(e, key) }} />
                 </td>
                 <td>
-                    <select 
-                    // value={fieldsObject[fieldName]?.type?fieldsObject[fieldName].type:'string'} 
-                    onChange={(e) => {
-                        setFields((prev) => {
-                            const updatedField = {
-                                ...prev[currentField],
-                                type: e.target.value,
-                            };
-                            return {
-                                ...prev,
-                                [currentField]: updatedField,
-                            };
-                        });
-                    }} >
+                    <select name = "type" value={value.type} onChange={(e) => { fieldChangeHandler(e, key) }}>
                         <option value="string">String</option>
                         <option value="number">Number</option>
                         <option value="boolean">Boolean</option>
@@ -59,63 +29,36 @@ const TableFormComponent = (props) => {
                     </select>
                 </td>
                 <td>
-                    <input 
-                    // value={fieldsObject[fieldName].required?fieldsObject[fieldName].required:'off'} 
-                    type="checkbox" onChange={(e) => {
-                        setFields((prev) => {
-                            const updatedField = {
-                                ...prev[currentField],
-                                required: e.target.value,
-                            };
-                            return {
-                                ...prev,
-                                [currentField]: updatedField,
-                            };
-                        });
-                    }} />
+                    <input name = "required" type="checkbox" checked = {value.required} onChange={(e) => { fieldChangeHandler(e, key) }} />
                 </td>
                 <td>
-                    <input type="checkbox" 
-                    // value = {fieldsObject[fieldName].unique?fieldsObject[fieldName].unique:'off'} 
-                    onChange={(e) => {
-                        setFields((prev) => {
-                            const updatedField = {
-                                ...prev[currentField],
-                                unique: e.target.value,
-                            };
-                            return {
-                                ...prev,
-                                [currentField]: updatedField,
-                            };
-                        });
-                    }} />
+                    <input name = "unique" type="checkbox" checked = {value.unique} onChange={(e) => { fieldChangeHandler(e, key) }} />
                 </td>
                 <td>
-                    <input type="text" 
-                    // value = {fieldsObject[fieldName].unique?fieldsObject[fieldName].unique:''} 
-                    onChange={(e) => {
-                        setFields((prev) => {
-                            const updatedField = {
-                                ...prev[currentField],
-                                default: e.target.value,
-                            };
-                            return {
-                                ...prev,
-                                [currentField]: updatedField,
-                            };
-                        });
-                    }} />
+                    <input name = "default" type="text" value={value.default} onChange={(e) => { fieldChangeHandler(e, key) }} />
                 </td>
-                <td>
-                    <button id = {id} onClick={(e) => {
-                        // props.setCounter((prev) => prev - 1);
-                        RemoveRow(setInputFields, id)
+                    {fields.length>1 && <td><button onClick={(e) => {
                         e.preventDefault();
-                    }}>-</button>
+                        setFields(fields.filter((value, index) => {
+                            return index != key;
+                        }))
+                    }}>-</button></td>
+                    }
+                <td>
+                    <button onClick={(e) => {
+                        e.preventDefault();
+                        // add one field under the clicked field
+                        let data = [...fields];
+                        data.splice(key+1, 0, { name: "karan", type: " ", required: true, unique: false, default: "" });
+                        setFields(data);
+                        
+                    }}>+</button>
+
                 </td>
+                
             </tr>
         </>
     )
 }
 
-export default TableFormComponent;
+export default TabelFormComponent;

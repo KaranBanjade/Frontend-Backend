@@ -1,90 +1,34 @@
-import React, { useEffect, useState } from 'react';
-import TableFormComponent from '../../TableFormComponent/TableFormComponent';
-import TableFunctions from '../../Functions/TableFunctions';
-const { AddRow, RemoveRow } = TableFunctions;
+import React from "react";
+import { useEffect, useState } from "react";
+import TabelFormComponent from "../../TableFormComponent/TableFormComponent";
 const SingleModelFieldsFormComponent = (props) => {
-    const models = props?.models;
-    const setModels = props?.setModels;
-    const index = props?.index;
-    const [model, setModel] = useState("");
-    const [counter, setCounter] = useState(0);
-    let id = '1';
-    const [inputFields, setInputFields] = useState({});
+    const [fields, setFields] = useState([{ name: "karan", type: " ", required: true, unique: false, default: "" },{ name: "karan", type: " ", required: true, unique: false, default: "" }]);
+    
     useEffect(() => {
-        console.log(inputFields)
-    }, [inputFields]);
-    // props.models
-    // props.setModels
-    // push into models
-    /*object => {
-        name : "",
-        fieldsObject :{
-            name:{
-                type : "",
-                required : false,
-                unique : false,
-                default : ""
-            }
-        }
-    }*/
+        // console.log(fields);
+    }, [fields])
     return (
         <>
-            <h1>Create Table</h1>
-            <form style={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                width: "100%",
-                height: "100%",
-                textAlign: "center"
-
-            }}>
-                <label htmlFor="name">Table Name</label>
-                <input type="text" name="name" id="name" onChange={(e) => {
-                    props.setModel(e.target.value)
-                }} />
-                <div id="fields" >
-                    <table border={{
-                        border: "1px solid black"
-                    }}>
-                        <thead>
-                            <tr>
-                                <th>Field Name</th>
-                                <th>Field Type</th>
-                                <th>Required</th>
-                                <th>Unique</th>
-                                <th>Default</th>
-                            </tr>
-
-                            {/* {   
-                                (models&&models.length>0)
-                                ?
-                                <TableFormComponent setModels = {setModels} setCounter = {setCounter}/>
-                                :
-                                <TableFormComponent setModels={setModels} setCounter = {setCounter}/>
-                            } */}
-                        </thead>
-                        <tbody>
-                            {
-                                Object.values(inputFields).map((inputField) => {
-                                    return inputField;
-                                })
-                            }
-
-                        </tbody>
-                        <tfoot>
-                            <tr>
-                                <td colSpan="5">
-                                    <button onClick={(e) => {
-                                        e.preventDefault();
-                                        setCounter((prev) => prev + 1);
-                                        AddRow(inputFields,setInputFields, counter, setCounter, setModels, TableFormComponent);
-                                    }}>Add Field</button>
-                                </td>
-                            </tr>
-                        </tfoot>
-                    </table>
-                </div>
+            <h1>Fields</h1>
+            <form>
+            <table border={"1px solid black"}>
+                <thead>
+                    <tr>
+                        <th>Field Name</th>
+                        <th>Type</th>
+                        <th>Required</th>
+                        <th>Unique</th>
+                        <th>Default</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {
+                        fields.map((value, key) => {
+                           return <TabelFormComponent key = {key} value={value} index={key} fields = {fields} setFields = {setFields} />
+                    })
+                }
+                </tbody>
+            </table>
             </form>
         </>
     )
