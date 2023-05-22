@@ -34,21 +34,26 @@ const { BeginFormComponent, DatabaseFormComponent,ModelsFormComponent,SingleMode
 const CreateProjectPage = () => {
     const [counter, setCounter] = useState(0);
     const [models, setModels] = useState([]);
-    const [FormsArray, setFormsArray] = useState([<BeginFormComponent />, <DatabaseFormComponent />, <SingleModelFieldsFormComponent models = {models} setModels = {setModels} index = {0}/>])
+    //#todo
+    // add props to recieve old data and set it to global array if needed
+    const [globalArray, setGlobalArray] = useState([[{ name: "", type: " ", required: true, unique: false, default: "" }]]);
+    const [FormsArray, setFormsArray] = useState([<BeginFormComponent />, <DatabaseFormComponent />, <SingleModelFieldsFormComponent globalArray = {globalArray} setGlobalArray = {setGlobalArray} index = {0}/>])
     // let FormsArray = [
     //     <BeginFormComponent />,
     //     <DatabaseFormComponent />,
     //     <SingleModelFieldsFormComponent models = {models} setModels = {setModels} index = {0}/>
     // ]
-
     useEffect(() => {
-        console.log(FormsArray)
+        console.log(globalArray)
+    }, [globalArray])
+    useEffect(() => {
+        // console.log(FormsArray)
     }, [models,FormsArray])
 
     useEffect(() => {
         // console.log(FormsArray)
         if(counter == FormsArray.length)
-            setFormsArray([...FormsArray, <SingleModelFieldsFormComponent model = {models} setModel = {setModels}  index = {counter} />])
+            setFormsArray([...FormsArray, <SingleModelFieldsFormComponent globalArray = {globalArray} setGlobalArray = {setGlobalArray} index = {counter-2} />])
             // FormsArray.push(<SingleModelFieldsFormComponent model = {models} setModel = {setModels}  index = {counter} />)
     }, [counter])
 

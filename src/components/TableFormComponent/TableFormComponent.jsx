@@ -10,10 +10,15 @@ const TabelFormComponent = (props) => {
         // console.log(type)
         // console.log(key, e.target.name, e.target.value)
         data[key][e.target.name] = type != "checkbox"?e.target.value:e.target.checked;
+        console.log(fields)
         setFields(data);
     }
     const value = props.value;
     const key = props.index;
+
+    useEffect(() => {
+        console.log(fields)
+    },[fields])
     return (
         <>
             <tr>
@@ -49,9 +54,13 @@ const TabelFormComponent = (props) => {
                         e.preventDefault();
                         // add one field under the clicked field
                         let data = [...fields];
-                        data.splice(key+1, 0, { name: "karan", type: " ", required: true, unique: false, default: "" });
+                        // if(key==0)
+                        //     data.splice(key, 0, { name: "", type: " ", required: true, unique: false, default: "" });
+                        // else
+                            data.splice(key+1, 0, { name: "", type: " ", required: true, unique: false, default: "" });
+                        // if spliced at 0
+
                         setFields(data);
-                        
                     }}>+</button>
 
                 </td>
