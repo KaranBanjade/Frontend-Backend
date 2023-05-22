@@ -34,21 +34,22 @@ const { BeginFormComponent, DatabaseFormComponent,ModelsFormComponent,SingleMode
 const CreateProjectPage = () => {
     const [counter, setCounter] = useState(0);
     const [models, setModels] = useState([]);
-
-    let FormsArray = [
-        <BeginFormComponent />,
-        <DatabaseFormComponent />,
-        <SingleModelFieldsFormComponent models = {models} setModels = {setModels} index = {0}/>
-    ]
+    const [FormsArray, setFormsArray] = useState([<BeginFormComponent />, <DatabaseFormComponent />, <SingleModelFieldsFormComponent models = {models} setModels = {setModels} index = {0}/>])
+    // let FormsArray = [
+    //     <BeginFormComponent />,
+    //     <DatabaseFormComponent />,
+    //     <SingleModelFieldsFormComponent models = {models} setModels = {setModels} index = {0}/>
+    // ]
 
     useEffect(() => {
-
+        console.log(FormsArray)
     }, [models,FormsArray])
 
     useEffect(() => {
         // console.log(FormsArray)
-        if(counter == FormsArray.length - 1)
-            FormsArray.push(<SingleModelFieldsFormComponent model = {models} setModel = {setModels}  index = {counter} />)
+        if(counter == FormsArray.length)
+            setFormsArray([...FormsArray, <SingleModelFieldsFormComponent model = {models} setModel = {setModels}  index = {counter} />])
+            // FormsArray.push(<SingleModelFieldsFormComponent model = {models} setModel = {setModels}  index = {counter} />)
     }, [counter])
 
     return (
