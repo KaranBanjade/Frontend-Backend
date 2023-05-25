@@ -36,7 +36,7 @@ const CreateProjectPage = () => {
     const [models, setModels] = useState([]);
     //#todo
     // add props to recieve old data and set it to global array if needed
-    const [globalArray, setGlobalArray] = useState([[{ name: "", type: " ", required: true, unique: false, default: "" }]]);
+    const [globalArray, setGlobalArray] = useState([]);
     const [FormsArray, setFormsArray] = useState([<BeginFormComponent />, <DatabaseFormComponent />, <SingleModelFieldsFormComponent globalArray = {globalArray} setGlobalArray = {setGlobalArray} index = {0}/>])
     // let FormsArray = [
     //     <BeginFormComponent />,
@@ -44,7 +44,7 @@ const CreateProjectPage = () => {
     //     <SingleModelFieldsFormComponent models = {models} setModels = {setModels} index = {0}/>
     // ]
     useEffect(() => {
-        console.log(globalArray)
+        console.log("GA Page", globalArray)
     }, [globalArray])
     useEffect(() => {
         // console.log(FormsArray)
@@ -60,7 +60,7 @@ const CreateProjectPage = () => {
     return (
         <>
         <div className="create-content">
-            <SidebarComponent className = "sidebar" models = {models}/>
+            {/* <SidebarComponent className = "sidebar" models = {models}/> */}
             <div>
                 {
                     <>

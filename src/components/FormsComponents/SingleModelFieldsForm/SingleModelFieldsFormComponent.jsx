@@ -1,29 +1,35 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import TabelFormComponent from "../../TableFormComponent/TableFormComponent";
-const SingleModelFieldsFormComponent = (props) => {
-    const globalArray = props.globalArray;
-    const setGlobalArray = props.setGlobalArray;
-    const index = props.index;
-    const[fields,  setFields] = useState([])
-
-    // if(globalArray[index] == undefined)
-    //     const [fields, setFields] = useState();
-    // else
-    //     const [fields, setFields] = useState(globalArray[index]);
-    // useEffect(() => {
-    //     console.log(globalArray);
-    // },[])
-    // useEffect(() => {
+const SingleModelFieldsFormComponent = ({ globalArray , setGlobalArray, index}) => {
+    const[fields,  setFields] = useState([]);
+    const[count, setCount] = useState(0);
         
     // }, [fields])
     useEffect(() => {
-        console.log(globalArray)
-        if(globalArray[index] != undefined)
+        // console.log("GA",globalArray[index])
+        if(globalArray[index] != undefined){
+            alert("global set");
             setFields(globalArray[index])
-        else
+            // console.log(fields, globalArray[index])
+        }
+        else{
+            // set globalArray[index] to fields
+            
+            // setGlobalArray()
             setFields([{ name: "", type: " ", required: true, unique: false, default: "" }])
+            setGlobalArray((prev)=>{
+                let dat = prev;
+                dat.push([{ name: "", type: " ", required: true, unique: false, default: "" }]);
+                return dat;
+            });
+        }
     },[])
+    useEffect(() => {
+        console.log(globalArray);
+        // console.log("F",fields);
+    },[count])
+    
 
     return (
         <>
@@ -48,21 +54,29 @@ const SingleModelFieldsFormComponent = (props) => {
                 </tbody>
                 <tfoot>
                     <tr>
+                        {/* gloabal [field,[{},{}],[{},{}]]
+                         [{},{}] */}
                         <td colSpan="5">
                             <button onClick={(e) => {
                                 e.preventDefault();
-                                console.log(globalArray[index])
-                                // setglobalArray[index] to fields
+                                // globalArray[index] to fields
                                 // find globalarray[index] and set it to fields
+                                // console.log(fields)
                                 setGlobalArray(globalArray.map((value, key) => {
+                                    // console.log(key, index);
+                                    // console.log("Fields", fields,"\nGloabl", globalArray);
+                                    // console.log("key", key, "index", index)
+                                    // console.log(key==index)
                                     if(key == index)
                                         return fields;
                                     else
                                         return value;
                                 }))
+                                setCount(count+1);
+                                // console.log("GA", globalArray);
                                 // setGlobalArray([...globalArray, fields])
                                 // setGlobalArray([...globalArray[index], fields])
-                                console.log(globalArray)
+                                // console.log(globalArray)
                                 }}>Save</button>
                         </td>
                     </tr>

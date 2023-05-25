@@ -10,14 +10,14 @@ const TabelFormComponent = (props) => {
         // console.log(type)
         // console.log(key, e.target.name, e.target.value)
         data[key][e.target.name] = type != "checkbox"?e.target.value:e.target.checked;
-        console.log(fields)
+        // console.log(fields)
         setFields(data);
     }
     const value = props.value;
     const key = props.index;
 
     useEffect(() => {
-        console.log(fields)
+        // console.log(fields)
     },[fields])
     return (
         <>
