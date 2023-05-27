@@ -13,7 +13,7 @@ const NavigateButton = ({ to, text, children, method }) => {
     else{
         return (
             <>
-            <a href = "localhost:3000/" className="navigate-button" onClick={method}>
+            <a href = "localhost:3000/" onClick={method}>
             {children||text}
             </a>
             </>

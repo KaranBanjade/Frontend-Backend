@@ -1,27 +1,63 @@
 import React from "react";
-// import { useState } from "react";
-import Components from "../../components";
-const {CommonButtonComponent} = Components;
-const DashboardPage = () => {
 
-    
-    return (
-        <div>
-            <CommonButtonComponent to="/dashboard" text="Dashboard Page" method={()=>{
-                alert("Dashboard Page");
-            }} />
-            <br></br>
-            <CommonButtonComponent to="/addnewbackend" text="Add New Backend" />
-            <br></br>
-            <CommonButtonComponent to="/viewallbackends" text="View All Backends" />
-            <br></br>
-            <CommonButtonComponent to="/downloadlastbackend" text="Download Last Backend" />
-            <br></br>
-            <CommonButtonComponent to="/profile" text="Profile" />
-            <br></br>
-            <CommonButtonComponent to="/logout" text="Logout" />
-        </div>
-    );
-}
+const DashboardPage = () => {
+  const containerStyle = {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    height: "100vh",
+    backgroundColor: "#f5f5f5",
+  };
+
+  const dashboardStyle = {
+    width: "600px",
+    padding: "30px",
+    borderRadius: "5px",
+    backgroundColor: "#ffffff",
+    boxShadow: "0px 2px 10px rgba(0, 0, 0, 0.1)",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+  };
+
+  const buttonStyle = {
+    width: "100%",
+    padding: "20px",
+    marginBottom: "20px",
+    borderRadius: "5px",
+    backgroundColor: "#007bff",
+    color: "#ffffff",
+    border: "none",
+    cursor: "pointer",
+    fontSize: "18px",
+    fontWeight: "bold",
+    textAlign: "center",
+    textTransform: "uppercase",
+    textDecoration: "none",
+  };
+
+  return (
+    <div style={containerStyle}>
+      <div style={dashboardStyle}>
+        <h1 style={{ marginBottom: "40px", textAlign: "center" }}>Dashboard</h1>
+        <a href="/addnewbackend" style={buttonStyle}>
+          Create New
+        </a>
+        <a href="/downloadlastbackend" style={buttonStyle}>
+          Download Last
+        </a>
+        <a href="/viewallbackends" style={buttonStyle}>
+          View All
+        </a>
+        <a href="/profile" style={buttonStyle}>
+          Profile
+        </a>
+        <a href="/" style={buttonStyle}>
+          Logout
+        </a>
+      </div>
+    </div>
+  );
+};
 
 export default DashboardPage;
