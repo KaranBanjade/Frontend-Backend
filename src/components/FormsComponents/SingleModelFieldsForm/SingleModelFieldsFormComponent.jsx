@@ -1,7 +1,7 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import TabelFormComponent from "../../TableFormComponent/TableFormComponent";
-const SingleModelFieldsFormComponent = ({ globalArray , setGlobalArray, index}) => {
+const SingleModelFieldsFormComponent = ({ globalArray , setGlobalArray, index, filterGlobal, defaultGlobal}) => {
     const[fields,  setFields] = useState([]);
     const[count, setCount] = useState(0);
         
@@ -10,23 +10,26 @@ const SingleModelFieldsFormComponent = ({ globalArray , setGlobalArray, index}) 
         // console.log("GA",globalArray[index])
         if(globalArray[index] != undefined){
             alert("global set");
+            // console.log(setGlobalArray((prev)=>{
+            //     return prev;
+            // }))
             setFields(globalArray[index])
             // console.log(fields, globalArray[index])
         }
         else{
             // set globalArray[index] to fields
-            
             // setGlobalArray()
             setFields([{ name: "", type: " ", required: true, unique: false, default: "" }])
-            setGlobalArray((prev)=>{
-                let dat = prev;
-                dat.push([{ name: "", type: " ", required: true, unique: false, default: "" }]);
-                return dat;
-            });
+            defaultGlobal();
         }
     },[])
     useEffect(() => {
-        console.log(globalArray);
+        // console.log("GA Comp",globalArray);
+        // setGlobalArray((prev)=>{
+        //     console.log("Prev",prev);
+        //     console.log("GA Comp", globalArray);
+        //     return prev;
+        // })
         // console.log("F",fields);
     },[count])
     
@@ -62,17 +65,9 @@ const SingleModelFieldsFormComponent = ({ globalArray , setGlobalArray, index}) 
                                 // globalArray[index] to fields
                                 // find globalarray[index] and set it to fields
                                 // console.log(fields)
-                                setGlobalArray(globalArray.map((value, key) => {
-                                    // console.log(key, index);
-                                    // console.log("Fields", fields,"\nGloabl", globalArray);
-                                    // console.log("key", key, "index", index)
-                                    // console.log(key==index)
-                                    if(key == index)
-                                        return fields;
-                                    else
-                                        return value;
-                                }))
+                                filterGlobal(index, fields);
                                 setCount(count+1);
+                                console.log("GA Comp", globalArray);
                                 // console.log("GA", globalArray);
                                 // setGlobalArray([...globalArray, fields])
                                 // setGlobalArray([...globalArray[index], fields])

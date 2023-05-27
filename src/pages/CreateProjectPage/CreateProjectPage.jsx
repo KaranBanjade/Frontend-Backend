@@ -37,7 +37,24 @@ const CreateProjectPage = () => {
     //#todo
     // add props to recieve old data and set it to global array if needed
     const [globalArray, setGlobalArray] = useState([]);
-    const [FormsArray, setFormsArray] = useState([<BeginFormComponent />, <DatabaseFormComponent />, <SingleModelFieldsFormComponent globalArray = {globalArray} setGlobalArray = {setGlobalArray} index = {0}/>])
+    const filterGlobal = (index, fields) => {
+        alert("filter");
+        setGlobalArray(globalArray.map((value, key) => {
+            if(key == index)
+                return fields;
+            else
+                return value;
+        }))
+    }
+    const defaultGlobal = () => {
+        alert("default")
+        setGlobalArray((prev)=>{
+            let dat = prev;
+            dat.push([{ name: "", type: " ", required: true, unique: false, default: "" }]);
+            return dat;
+        });
+    }
+    const [FormsArray, setFormsArray] = useState([<BeginFormComponent />, <DatabaseFormComponent />, <SingleModelFieldsFormComponent globalArray = {globalArray} setGlobalArray = {setGlobalArray} index = {0} filterGlobal = {filterGlobal} defaultGlobal = {defaultGlobal}/>])
     // let FormsArray = [
     //     <BeginFormComponent />,
     //     <DatabaseFormComponent />,
@@ -49,7 +66,6 @@ const CreateProjectPage = () => {
     useEffect(() => {
         // console.log(FormsArray)
     }, [models,FormsArray])
-
     useEffect(() => {
         // console.log(FormsArray)
         if(counter == FormsArray.length)
