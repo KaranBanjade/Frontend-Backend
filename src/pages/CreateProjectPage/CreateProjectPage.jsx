@@ -3,24 +3,18 @@ import "./CreateProjectPage.css";
 import Components from "../../components";
 import SidebarComponent from "../../components/SidebarComponent/SidebarComponent";
 
-const { BeginFormComponent, DatabaseFormComponent, ModelsFormComponent, SingleModelFieldsFormComponent } = Components;
+const { BeginFormComponent, DatabaseFormComponent, SingleModelFieldsFormComponent } = Components;
 
 const CreateProjectPage = () => {
   const [counter, setCounter] = useState(0);
   const [globalArray, setGlobalArray] = useState([]);
   const [projectSettings, setProjectSettings] = useState({});
   const [databaseSettings, setDatabaseSettings] = useState({});
-
+  const [submit, setSubmit] = useState(false);
 
   const filterGlobal = (index, fields) => {
     setGlobalArray(prev => {
-      return prev.map((value, key) => {
-        if (key === index) {
-          return fields;
-        } else {
-          return value;
-        }
-      });
+      return prev.map((value, key) => (key === index ? fields : value));
     });
   };
 
@@ -28,33 +22,49 @@ const CreateProjectPage = () => {
     setGlobalArray(prev => [...prev, [{ name: "", type: " ", required: true, unique: false, default: "" }]]);
   };
 
+  const handleNext = () => {
+    setCounter(prev => prev + 1);
+  };
+
+  const handleBack = () => {
+    setCounter(prev => prev - 1);
+  };
+
+  const handleSubmit = () => {
+    setSubmit(true);
+    console.log("Project Settings: ", projectSettings);
+    console.log("Database Settings: ", databaseSettings);
+    console.log("Global Array: ", globalArray);
+  };
+
   const returnForms = () => {
-    if (counter === 0) {
-      return <BeginFormComponent projectSettings = {projectSettings} setProjectSettings={setProjectSettings} />;
-    } else if (counter === 1) {
-      return <DatabaseFormComponent databaseSettings = {databaseSettings} setDatabaseSettings = {setDatabaseSettings}/>;
-    } else if (counter === 2) {
-      return <SingleModelFieldsFormComponent globalArray={globalArray} setGlobalArray={setGlobalArray} index={0} filterGlobal={filterGlobal} defaultGlobal={defaultGlobal} />;
-    } else {
-      return <SingleModelFieldsFormComponent globalArray={globalArray} setGlobalArray={setGlobalArray} index={counter - 2} filterGlobal={filterGlobal} defaultGlobal={defaultGlobal} />;
+    switch (counter) {
+      case 0:
+        return <BeginFormComponent projectSettings={projectSettings} setProjectSettings={setProjectSettings} />;
+      case 1:
+        return <DatabaseFormComponent databaseSettings={databaseSettings} setDatabaseSettings={setDatabaseSettings} />;
+      case 2:
+        return <SingleModelFieldsFormComponent globalArray={globalArray} setGlobalArray={setGlobalArray} index={0} filterGlobal={filterGlobal} defaultGlobal={defaultGlobal} />;
+      default:
+        return <SingleModelFieldsFormComponent globalArray={globalArray} setGlobalArray={setGlobalArray} index={counter - 2} filterGlobal={filterGlobal} defaultGlobal={defaultGlobal} />;
     }
   };
 
   return (
     <div className="create-content">
-      {/* <SidebarComponent className="sidebar" setCounter = {setCounter} /> */}
+      {/* <SidebarComponent className="sidebar" setCounter={setCounter} /> */}
       <div>
         <h1>Counter: {counter}</h1>
-        {returnForms()}
-        <button onClick={() => setCounter(counter + 1)}>Next</button>
-        {counter > 0 && <button onClick={() => setCounter(counter - 1)}>Back</button>}
-        {
-          counter > 2 && <button onClick={() => {
-            console.log("Project Settings: ", projectSettings);
-            console.log("Database Settings: ", databaseSettings);
-            console.log("Global Array: ", globalArray);
-          }}>Submit</button>
-        }
+        {!submit ? (
+          returnForms()
+        ) : (
+          <h1>Submitted</h1>
+        )}
+        <button onClick={handleNext}>Next</button>
+        {counter > 0 && <button onClick={handleBack}>Back</button>}
+        {counter >= 2 && (
+          <button onClick={handleSubmit}>Submit</button>
+        )}
       </div>
     </div>
   );

@@ -1,14 +1,25 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 const DatabaseFormComponent = ({ databaseSettings, setDatabaseSettings }) => {
+  const [inputValues, setInputValues] = useState(databaseSettings);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setDatabaseSettings(inputValues);
+    }, 500);
+
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [inputValues, setDatabaseSettings]);
+
   const fieldOnChangeHandler = (e) => {
     e.preventDefault();
-    setDatabaseSettings((prev) => {
-      return {
-        ...prev,
-        [e.target.name]: e.target.value,
-      };
-    });
+    const { name, value } = e.target;
+    setInputValues((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
   };
 
   return (
@@ -25,8 +36,8 @@ const DatabaseFormComponent = ({ databaseSettings, setDatabaseSettings }) => {
                 <input
                   type="text"
                   name="dbname"
-                  value={databaseSettings?.dbname ? databaseSettings.dbname : ""}
-                  onChange={(e) => fieldOnChangeHandler(e)}
+                  value={inputValues.dbname || ""}
+                  onChange={fieldOnChangeHandler}
                 />
               </td>
             </tr>
@@ -37,8 +48,8 @@ const DatabaseFormComponent = ({ databaseSettings, setDatabaseSettings }) => {
               <td>
                 <select
                   name="dbtype"
-                  value={databaseSettings?.dbtype ? databaseSettings.dbtype : "MySQL"}
-                  onChange={(e) => fieldOnChangeHandler(e)}
+                  value={inputValues.dbtype || "MySQL"}
+                  onChange={fieldOnChangeHandler}
                 >
                   <option value="MongoDB">MongoDB</option>
                   <option value="PostgreSQL">PostgreSQL</option>
@@ -54,8 +65,8 @@ const DatabaseFormComponent = ({ databaseSettings, setDatabaseSettings }) => {
                 <input
                   type="text"
                   name="dbhost"
-                  value={databaseSettings?.dbhost ? databaseSettings.dbhost : ""}
-                  onChange={(e) => fieldOnChangeHandler(e)}
+                  value={inputValues.dbhost || ""}
+                  onChange={fieldOnChangeHandler}
                 />
               </td>
             </tr>
@@ -67,8 +78,8 @@ const DatabaseFormComponent = ({ databaseSettings, setDatabaseSettings }) => {
                 <input
                   type="text"
                   name="dbport"
-                  value={databaseSettings?.dbport ? databaseSettings.dbport : ""}
-                  onChange={(e) => fieldOnChangeHandler(e)}
+                  value={inputValues.dbport || ""}
+                  onChange={fieldOnChangeHandler}
                 />
               </td>
             </tr>
@@ -80,8 +91,8 @@ const DatabaseFormComponent = ({ databaseSettings, setDatabaseSettings }) => {
                 <input
                   type="text"
                   name="dbusername"
-                  value={databaseSettings?.dbusername ? databaseSettings.dbusername : ""}
-                  onChange={(e) => fieldOnChangeHandler(e)}
+                  value={inputValues.dbusername || ""}
+                  onChange={fieldOnChangeHandler}
                 />
               </td>
             </tr>
@@ -93,8 +104,8 @@ const DatabaseFormComponent = ({ databaseSettings, setDatabaseSettings }) => {
                 <input
                   type="text"
                   name="dbpassword"
-                  value={databaseSettings?.dbpassword ? databaseSettings.dbpassword : ""}
-                  onChange={(e) => fieldOnChangeHandler(e)}
+                  value={inputValues.dbpassword || ""}
+                  onChange={fieldOnChangeHandler}
                 />
               </td>
             </tr>
