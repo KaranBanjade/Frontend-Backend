@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import "./BeginFormComponent.css";
 
 const BeginFormComponent = ({ projectSettings, setProjectSettings }) => {
   const [inputValue, setInputValue] = useState(projectSettings.projectname || "");
@@ -23,7 +24,7 @@ const BeginFormComponent = ({ projectSettings, setProjectSettings }) => {
   };
 
   return (
-    <>
+    <div className="begin-form-component">
       <h1>Project Settings</h1>
       <form>
         <table>
@@ -43,7 +44,7 @@ const BeginFormComponent = ({ projectSettings, setProjectSettings }) => {
           </tbody>
         </table>
       </form>
-    </>
+    </div>
   );
 };
 

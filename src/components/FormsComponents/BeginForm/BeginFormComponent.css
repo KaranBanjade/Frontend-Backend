@@ -1,0 +1,32 @@
+.begin-form-component {
+    margin-top: 20px;
+  }
+  
+  .begin-form-component h1 {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  
+  .begin-form-component form {
+    width: 100%;
+  }
+  
+  .begin-form-component table {
+    width: 100%;
+  }
+  
+  .begin-form-component td {
+    padding: 10px;
+  }
+  
+  .begin-form-component label {
+    font-weight: bold;
+  }
+  
+  .begin-form-component input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 3px;
+    border: 1px solid #cccccc;
+  }
+  

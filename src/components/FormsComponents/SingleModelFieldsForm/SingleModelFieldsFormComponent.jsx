@@ -15,16 +15,16 @@ const SingleModelFieldsFormComponent = ({ globalArray, index, filterGlobal, defa
 
   return (
     <>
-      <h1>Fields</h1>
+      <h1 style={{ textAlign: "center" }}>Fields</h1>
       <form>
-        <table >
+        <table style={{ margin: "auto" }}>
           <thead>
             <tr>
-              <th>Field Name</th>
-              <th>Type</th>
-              <th>Required</th>
-              <th>Unique</th>
-              <th>Default</th>
+              <th style={styles.tableHeader}>Field Name</th>
+              <th style={styles.tableHeader}>Type</th>
+              <th style={styles.tableHeader}>Required</th>
+              <th style={styles.tableHeader}>Unique</th>
+              <th style={styles.tableHeader}>Default</th>
             </tr>
           </thead>
           <tbody>
@@ -33,9 +33,10 @@ const SingleModelFieldsFormComponent = ({ globalArray, index, filterGlobal, defa
             })}
           </tbody>
           <tfoot>
-            <tr>
-              <td colSpan="5">
+            <tr >
+              <td>
                 <button
+                  style={styles.saveButton}
                   onClick={(e) => {
                     e.preventDefault();
                     filterGlobal(index, fields);
@@ -53,3 +54,19 @@ const SingleModelFieldsFormComponent = ({ globalArray, index, filterGlobal, defa
 };
 
 export default SingleModelFieldsFormComponent;
+
+const styles = {
+  tableHeader: {
+    textAlign: "center",
+  },
+  saveButton: {
+    width: "100%",
+    padding: "10px",
+    borderRadius: "3px",
+    backgroundColor: "#007bff",
+    color: "#ffffff",
+    border: "none",
+    cursor: "pointer",
+    textAlign: "center",
+  },
+};

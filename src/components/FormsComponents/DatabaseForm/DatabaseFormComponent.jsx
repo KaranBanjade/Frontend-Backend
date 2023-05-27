@@ -24,9 +24,9 @@ const DatabaseFormComponent = ({ databaseSettings, setDatabaseSettings }) => {
 
   return (
     <>
-      <h1>Database Settings</h1>
+      <h1 style={{ textAlign: "center" }}>Database Settings</h1>
       <form>
-        <table>
+        <table style={{ margin: "auto" }}>
           <tbody>
             <tr>
               <td>
@@ -38,6 +38,12 @@ const DatabaseFormComponent = ({ databaseSettings, setDatabaseSettings }) => {
                   name="dbname"
                   value={inputValues.dbname || ""}
                   onChange={fieldOnChangeHandler}
+                  style={{
+                    width: "100%",
+                    padding: "10px",
+                    borderRadius: "3px",
+                    border: "1px solid #cccccc",
+                  }}
                 />
               </td>
             </tr>
@@ -50,6 +56,12 @@ const DatabaseFormComponent = ({ databaseSettings, setDatabaseSettings }) => {
                   name="dbtype"
                   value={inputValues.dbtype || "MySQL"}
                   onChange={fieldOnChangeHandler}
+                  style={{
+                    width: "100%",
+                    padding: "10px",
+                    borderRadius: "3px",
+                    border: "1px solid #cccccc",
+                  }}
                 >
                   <option value="MongoDB">MongoDB</option>
                   <option value="PostgreSQL">PostgreSQL</option>
@@ -67,6 +79,12 @@ const DatabaseFormComponent = ({ databaseSettings, setDatabaseSettings }) => {
                   name="dbhost"
                   value={inputValues.dbhost || ""}
                   onChange={fieldOnChangeHandler}
+                  style={{
+                    width: "100%",
+                    padding: "10px",
+                    borderRadius: "3px",
+                    border: "1px solid #cccccc",
+                  }}
                 />
               </td>
             </tr>
@@ -80,6 +98,12 @@ const DatabaseFormComponent = ({ databaseSettings, setDatabaseSettings }) => {
                   name="dbport"
                   value={inputValues.dbport || ""}
                   onChange={fieldOnChangeHandler}
+                  style={{
+                    width: "100%",
+                    padding: "10px",
+                    borderRadius: "3px",
+                    border: "1px solid #cccccc",
+                  }}
                 />
               </td>
             </tr>
@@ -93,6 +117,12 @@ const DatabaseFormComponent = ({ databaseSettings, setDatabaseSettings }) => {
                   name="dbusername"
                   value={inputValues.dbusername || ""}
                   onChange={fieldOnChangeHandler}
+                  style={{
+                    width: "100%",
+                    padding: "10px",
+                    borderRadius: "3px",
+                    border: "1px solid #cccccc",
+                  }}
                 />
               </td>
             </tr>
@@ -106,6 +136,12 @@ const DatabaseFormComponent = ({ databaseSettings, setDatabaseSettings }) => {
                   name="dbpassword"
                   value={inputValues.dbpassword || ""}
                   onChange={fieldOnChangeHandler}
+                  style={{
+                    width: "100%",
+                    padding: "10px",
+                    borderRadius: "3px",
+                    border: "1px solid #cccccc",
+                  }}
                 />
               </td>
             </tr>
