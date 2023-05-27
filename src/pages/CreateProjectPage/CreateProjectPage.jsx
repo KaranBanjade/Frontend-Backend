@@ -27,7 +27,7 @@ const CreateProjectPage = () => {
   };
 
   const handleBack = () => {
-    if (submit){
+    if (submit) {
       setSubmit((prev) => (!prev))
       return;
     }
@@ -62,12 +62,12 @@ const CreateProjectPage = () => {
         {!submit ? (
           returnForms()
         ) : (
-          <SubmitComponent projectSettings= {projectSettings} databaseSettings = {databaseSettings} />
+          <SubmitComponent projectSettings={projectSettings} databaseSettings={databaseSettings} globalArray={globalArray} />
         )}
         {submit || <button onClick={handleNext}>Next</button>}
         {counter > 0 && <button onClick={handleBack}>Back</button>}
         {counter >= 2 && (
-          <button onClick={handleSubmit}>Submit</button>
+          <button onClick={handleSubmit}>{submit ? "Finish" : "Submit"}</button>
         )}
       </div>
     </div>
