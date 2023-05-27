@@ -1,5 +1,5 @@
 import React from "react";
-
+import "./SubmitComponent.css";
 const SubmitComponent = ({ projectSettings, databaseSettings, globalArray }) => {
   return (
     <div className="submit-component">
@@ -67,7 +67,7 @@ const SubmitComponent = ({ projectSettings, databaseSettings, globalArray }) => 
           </thead>
           <tbody>
             {table.map((field, index) => (
-                <table key={index} className="submit-table">
+                <table key={index} >
                     <thead>
                         <tr>
                             <th colSpan={2}>

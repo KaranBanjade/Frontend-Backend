@@ -1,0 +1,40 @@
+.submit-component {
+    margin-top: 20px;
+  }
+  
+  .submit-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+  }
+  
+  .submit-table th {
+    background-color: #f0f0f0;
+    padding: 10px;
+    text-align: left;
+  }
+  
+  .submit-table td {
+    padding: 10px;
+  }
+  
+  .submit-table h2 {
+    margin: 0;
+    font-size: 18px;
+  }
+  
+  .submit-table h3 {
+    margin: 0;
+    font-size: 16px;
+    margin-top: 10px;
+    margin-bottom: 5px;
+  }
+  
+  .submit-table strong {
+    font-weight: bold;
+  }
+  
+  .submit-table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
