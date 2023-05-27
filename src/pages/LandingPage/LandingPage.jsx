@@ -39,6 +39,10 @@ const LandingPage = () => {
   const ctaButtonStyle = {
     padding: "10px 20px",
     fontSize: "18px",
+    backgroundColor: "lightBlue",
+    borderRadius: "4%",
+    cursor: "pointer",
+    textDecoration: "none",
   };
 
   return (
@@ -88,7 +92,7 @@ const LandingPage = () => {
           <p>
             Start using [Project Name] today and simplify your backend development process. Experience the benefits of automated code generation and accelerate your project's progress.
           </p>
-          <button style={ctaButtonStyle}>Get Started</button>
+          <a style={ctaButtonStyle} href="/user" >Get Started</a>
         </div>
       </div>
     </div>
