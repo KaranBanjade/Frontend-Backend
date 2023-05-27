@@ -35,7 +35,12 @@ const CreateProjectPage = () => {
   };
 
   const handleSubmit = () => {
-    setSubmit(true);
+
+
+    setSubmit((prev) => (!prev));
+    // API call here
+    submit?alert("Dowlnoad Started"):alert("Submitted");
+
     console.log("Project Settings: ", projectSettings);
     console.log("Database Settings: ", databaseSettings);
     console.log("Global Array: ", globalArray);
