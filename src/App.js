@@ -2,7 +2,7 @@
 import './App.css';
 import Pages from './pages';
 import { BrowserRouter , Routes, Route } from 'react-router-dom';
-const { LoginPage, DashboardPage, CreateProjectPage,LandingPage } = Pages;
+const { LoginPage, DashboardPage, CreateProjectPage,LandingPage,ProfilePage } = Pages;
 function App() {
   return (
     <div className="App">
@@ -17,6 +17,7 @@ function App() {
       <Route path='/' >
         <Route index element={<LandingPage />} />
         <Route path = "user" element={<LoginPage />} />
+        <Route path="profile" element={<ProfilePage/>} />
         <Route path="dashboard" element={<DashboardPage/>} />
         <Route path="addnewbackend" element={<CreateProjectPage/>} />
       </Route>
