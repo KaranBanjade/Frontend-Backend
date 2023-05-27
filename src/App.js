@@ -1,8 +1,10 @@
 // import { BrowserRouter, Route } from 'react-router-dom';
 import './App.css';
 import Pages from './pages';
+import Components from './components';
 import { BrowserRouter , Routes, Route } from 'react-router-dom';
 const { LoginPage, DashboardPage, CreateProjectPage,LandingPage,ProfilePage } = Pages;
+const { NavbarComponent } = Components;
 function App() {
   return (
     <div className="App">
@@ -13,6 +15,7 @@ function App() {
         </Routes>
       </BrowserRouter> */}
       <BrowserRouter>
+      <NavbarComponent />
       <Routes>
       <Route path='/' >
         <Route index element={<LandingPage />} />

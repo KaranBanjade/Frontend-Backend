@@ -65,13 +65,12 @@ const CreateProjectPage = () => {
     <div className="create-content">
       {/* <SidebarComponent className="sidebar" setCounter={setCounter} /> */}
       <div>
-        <h1 style={{ textAlign: "center" }}>Counter: {counter}</h1>
         {!submit ? (
           returnForms()
         ) : (
           <SubmitComponent projectSettings={projectSettings} databaseSettings={databaseSettings} globalArray={globalArray} />
         )}
-        <div className="buttonsFooter" style={styles.buttonsFooter}>
+        <div className="buttonsFooter stickyFooter" style={styles.buttonsFooter}>
           {submit || <button style={styles.button} onClick={handleNext}>Next</button>}
           {counter > 0 && <button style={styles.button} onClick={handleBack}>Back</button>}
           {counter >= 2 && (

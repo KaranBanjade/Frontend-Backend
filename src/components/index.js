@@ -5,6 +5,7 @@ import CreateProjectFormsComponent from './CreateProjectFormsComponent/CreatePro
 import FormComponents  from './FormsComponents';
 import TableFormComponent from './TableFormComponent/TableFormComponent';
 import SubmitComponent from './SubmitComponent/SubmitComponent';
+import NavbarComponent from './NavbarComponent/NavbarComponent';
 const Components = {
     LoginComponent,
     RegisterComponent,
@@ -12,6 +13,7 @@ const Components = {
     CreateProjectFormsComponent,
     TableFormComponent,
     SubmitComponent,
+    NavbarComponent,
     ...FormComponents
 };
 
