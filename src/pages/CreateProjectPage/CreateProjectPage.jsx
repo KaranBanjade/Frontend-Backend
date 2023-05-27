@@ -7,8 +7,10 @@ const { BeginFormComponent, DatabaseFormComponent, ModelsFormComponent, SingleMo
 
 const CreateProjectPage = () => {
   const [counter, setCounter] = useState(0);
-  const [models, setModels] = useState([]);
   const [globalArray, setGlobalArray] = useState([]);
+  const [projectSettings, setProjectSettings] = useState({});
+  const [databaseSettings, setDatabaseSettings] = useState({});
+
 
   const filterGlobal = (index, fields) => {
     setGlobalArray(prev => {
@@ -28,9 +30,9 @@ const CreateProjectPage = () => {
 
   const returnForms = () => {
     if (counter === 0) {
-      return <BeginFormComponent />;
+      return <BeginFormComponent projectSettings = {projectSettings} setProjectSettings={setProjectSettings} />;
     } else if (counter === 1) {
-      return <DatabaseFormComponent />;
+      return <DatabaseFormComponent databaseSettings = {databaseSettings} setDatabaseSettings = {setDatabaseSettings}/>;
     } else if (counter === 2) {
       return <SingleModelFieldsFormComponent globalArray={globalArray} setGlobalArray={setGlobalArray} index={0} filterGlobal={filterGlobal} defaultGlobal={defaultGlobal} />;
     } else {
@@ -46,6 +48,13 @@ const CreateProjectPage = () => {
         {returnForms()}
         <button onClick={() => setCounter(counter + 1)}>Next</button>
         {counter > 0 && <button onClick={() => setCounter(counter - 1)}>Back</button>}
+        {
+          counter > 2 && <button onClick={() => {
+            console.log("Project Settings: ", projectSettings);
+            console.log("Database Settings: ", databaseSettings);
+            console.log("Global Array: ", globalArray);
+          }}>Submit</button>
+        }
       </div>
     </div>
   );

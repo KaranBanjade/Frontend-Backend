@@ -17,7 +17,7 @@ const SingleModelFieldsFormComponent = ({ globalArray, index, filterGlobal, defa
     <>
       <h1>Fields</h1>
       <form>
-        <table border={"1px solid black"}>
+        <table >
           <thead>
             <tr>
               <th>Field Name</th>

@@ -1,29 +1,28 @@
-const BeginFormComponent = () => {
+const BeginFormComponent = ({projectSettings, setProjectSettings}) => {
+    const fieldOnChangeHandler = (e) => {
+        e.preventDefault();
+        setProjectSettings((prev) => {
+          return {
+            ...prev,
+            [e.target.name]: e.target.value,
+          };
+        });
+      };
     return (
         <>
             <h1>Project Settings</h1>
             <form>
                 <table>
+                    <tbody>
                     <tr>
                         <td>
-                            <label>Project Name</label>
+                            <label htmlFor="projectname">Project Name</label>
                         </td>
                         <td>
-                            <input type={"text"} />
+                            <input type={"text"} value={projectSettings?.projectname?projectSettings.projectname:""} onChange={(e)=>fieldOnChangeHandler(e)}/>
                         </td>
                     </tr>
-                    <tr>
-                        <td>
-                            <label>Database Choice</label>
-                        </td>
-                        <td>
-                            <select>
-                                <option value="MongoDB">MongoDB</option>
-                                <option value="PostgreSQL">PostgreSQL</option>
-                                <option value="MySQL">MySQL</option>
-                            </select>
-                        </td>
-                    </tr>
+                    </tbody>
                 </table>
             </form>
         </>
