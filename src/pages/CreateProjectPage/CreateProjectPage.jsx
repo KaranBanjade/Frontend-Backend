@@ -89,7 +89,7 @@ const CreateProjectPage = () => {
             return <DatabaseFormComponent />
         else if(counter==2)
             return <SingleModelFieldsFormComponent globalArray = {globalArray} setGlobalArray = {setGlobalArray} index = {0} filterGlobal = {filterGlobal} defaultGlobal = {defaultGlobal}/>
-        else if(counter>2){
+        else{
             // sdefaultGlobal();
             return <SingleModelFieldsFormComponent globalArray = {globalArray} setGlobalArray = {setGlobalArray} index = {counter-2} filterGlobal = {filterGlobal} defaultGlobal = {defaultGlobal}/>}
     }
