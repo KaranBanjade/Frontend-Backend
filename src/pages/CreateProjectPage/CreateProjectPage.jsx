@@ -3,7 +3,7 @@ import "./CreateProjectPage.css";
 import Components from "../../components";
 import SidebarComponent from "../../components/SidebarComponent/SidebarComponent";
 
-const { BeginFormComponent, DatabaseFormComponent, SingleModelFieldsFormComponent } = Components;
+const { BeginFormComponent, DatabaseFormComponent, SingleModelFieldsFormComponent, SubmitComponent } = Components;
 
 const CreateProjectPage = () => {
   const [counter, setCounter] = useState(0);
@@ -27,6 +27,10 @@ const CreateProjectPage = () => {
   };
 
   const handleBack = () => {
+    if (submit){
+      setSubmit((prev) => (!prev))
+      return;
+    }
     setCounter(prev => prev - 1);
   };
 
@@ -58,9 +62,9 @@ const CreateProjectPage = () => {
         {!submit ? (
           returnForms()
         ) : (
-          <h1>Submitted</h1>
+          <SubmitComponent projectSettings= {projectSettings} databaseSettings = {databaseSettings} />
         )}
-        <button onClick={handleNext}>Next</button>
+        {submit || <button onClick={handleNext}>Next</button>}
         {counter > 0 && <button onClick={handleBack}>Back</button>}
         {counter >= 2 && (
           <button onClick={handleSubmit}>Submit</button>

@@ -4,12 +4,14 @@ import CommonButtonComponent from './CommonButtonComponent/CommonButtonComponent
 import CreateProjectFormsComponent from './CreateProjectFormsComponent/CreateProjectFormsComponent';
 import FormComponents  from './FormsComponents';
 import TableFormComponent from './TableFormComponent/TableFormComponent';
+import SubmitComponent from './SubmitComponent/SubmitComponent';
 const Components = {
     LoginComponent,
     RegisterComponent,
     CommonButtonComponent,
     CreateProjectFormsComponent,
     TableFormComponent,
+    SubmitComponent,
     ...FormComponents
 };
 
