@@ -2,36 +2,37 @@ import React from "react";
 import { useEffect, useState } from "react";
 import TabelFormComponent from "../../TableFormComponent/TableFormComponent";
 const SingleModelFieldsFormComponent = ({ globalArray , setGlobalArray, index, filterGlobal, defaultGlobal}) => {
-    const[fields,  setFields] = useState([]);
+    const[fields,  setFields] = useState([{ name: "", type: " ", required: true, unique: false, default: "" }]);
     const[count, setCount] = useState(0);
-        
+
+    useEffect(() => {
+        console.log("sup")
+        console.log(globalArray);
+    },[globalArray])
+
     // }, [fields])
     useEffect(() => {
-        // console.log("GA",globalArray[index])
-        if(globalArray[index] != undefined){
-            alert("global set");
-            // console.log(setGlobalArray((prev)=>{
-            //     return prev;
-            // }))
-            setFields(globalArray[index])
-            // console.log(fields, globalArray[index])
-        }
-        else{
-            // set globalArray[index] to fields
-            // setGlobalArray()
+        alert(index);
+        console.log("GA",globalArray[index])
+        if(!globalArray[index]){
+            alert("global not set");
             setFields([{ name: "", type: " ", required: true, unique: false, default: "" }])
             defaultGlobal();
         }
+        else{
+            alert("global set");
+            setFields(globalArray[index])
+        }
     },[])
-    useEffect(() => {
-        // console.log("GA Comp",globalArray);
-        // setGlobalArray((prev)=>{
-        //     console.log("Prev",prev);
-        //     console.log("GA Comp", globalArray);
-        //     return prev;
-        // })
-        // console.log("F",fields);
-    },[count])
+    // useEffect(() => {
+    //     // console.log("GA Comp",globalArray);
+    //     // setGlobalArray((prev)=>{
+    //     //     console.log("Prev",prev);
+    //     //     console.log("GA Comp", globalArray);
+    //     //     return prev;
+    //     // })
+    //     // console.log("F",fields);
+    // },[count])
     
 
     return (

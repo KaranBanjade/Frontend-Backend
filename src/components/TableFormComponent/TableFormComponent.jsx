@@ -1,5 +1,5 @@
 const React = require('react');
-const { useState, useEffect } = require('react');
+
 
 const TabelFormComponent = (props) => {
     const fields = props.fields;
@@ -16,9 +16,9 @@ const TabelFormComponent = (props) => {
     const value = props.value;
     const key = props.index;
 
-    useEffect(() => {
-        // console.log(fields)
-    },[fields])
+    // useEffect(() => {
+    //     // console.log(fields)
+    // },[fields])
     return (
         <>
             <tr>
