@@ -67,39 +67,39 @@ const SubmitComponent = ({ projectSettings, databaseSettings, globalArray }) => 
           </thead>
           <tbody>
             {table.map((field, index) => (
-                <table key={index} >
-                    <thead>
-                        <tr>
-                            <th colSpan={2}>
-                                <h3>Field {index + 1}</h3>
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-              <React.Fragment key={index}>
-                <tr>
-                  <td><strong>Field Name:</strong></td>
-                  <td>{field.name}</td>
-                </tr>
-                <tr>
-                  <td><strong>Field Type:</strong></td>
-                  <td>{field.type}</td>
-                </tr>
-                <tr>
-                  <td><strong>Field Required:</strong></td>
-                  <td>{field.required.toString()}</td>
-                </tr>
-                <tr>
-                  <td><strong>Field Unique:</strong></td>
-                  <td>{field.unique.toString()}</td>
-                </tr>
-                <tr>
-                  <td><strong>Field Default:</strong></td>
-                  <td>{field.default}</td>
-                </tr>
-              </React.Fragment>
+              <table key={index} >
+                <thead>
+                  <tr>
+                    <th colSpan={2}>
+                      <h3>Field {index + 1}</h3>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <React.Fragment key={index}>
+                    <tr>
+                      <td><strong>Field Name:</strong></td>
+                      <td>{field.name}</td>
+                    </tr>
+                    <tr>
+                      <td><strong>Field Type:</strong></td>
+                      <td>{field.type}</td>
+                    </tr>
+                    <tr>
+                      <td><strong>Field Required:</strong></td>
+                      <td>{field.required.toString()}</td>
+                    </tr>
+                    <tr>
+                      <td><strong>Field Unique:</strong></td>
+                      <td>{field.unique.toString()}</td>
+                    </tr>
+                    <tr>
+                      <td><strong>Field Default:</strong></td>
+                      <td>{field.default}</td>
+                    </tr>
+                  </React.Fragment>
                 </tbody>
-                </table>
+              </table>
             ))}
           </tbody>
         </table>

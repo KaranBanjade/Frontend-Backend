@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, {useState } from "react";
 import "./CreateProjectPage.css";
 import Components from "../../components";
-import SidebarComponent from "../../components/SidebarComponent/SidebarComponent";
+// import SidebarComponent from "../../components/SidebarComponent/SidebarComponent";
 
 const { BeginFormComponent, DatabaseFormComponent, SingleModelFieldsFormComponent, SubmitComponent } = Components;
 
@@ -70,7 +70,7 @@ const CreateProjectPage = () => {
         ) : (
           <SubmitComponent projectSettings={projectSettings} databaseSettings={databaseSettings} globalArray={globalArray} />
         )}
-        <div className="buttonsFooter stickyFooter" style={styles.buttonsFooter}>
+        <div className="buttonsFooter" style={styles.buttonsFooter}>
           {submit || <button style={styles.button} onClick={handleNext}>Next</button>}
           {counter > 0 && <button style={styles.button} onClick={handleBack}>Back</button>}
           {counter >= 2 && (
