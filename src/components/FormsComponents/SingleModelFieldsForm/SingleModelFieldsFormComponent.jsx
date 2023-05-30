@@ -1,24 +1,41 @@
 import React, { useEffect, useState } from "react";
 import TabelFormComponent from "../../TableFormComponent/TableFormComponent";
 
-const SingleModelFieldsFormComponent = ({ globalArray, index, filterGlobal, defaultGlobal }) => {
+const SingleModelFieldsFormComponent = ({ globalArray, index, filterGlobal, defaultGlobal, models, setModels }) => {
   const [fields, setFields] = useState([]);
+  const [modelName, setModelName] = useState(""); // New state variable for modelName
 
   useEffect(() => {
+    models[index]?setModelName(models[index]):setModelName("");
+
     if (globalArray[index] !== undefined) {
       setFields([...globalArray[index]]);
     } else {
       setFields([{ name: "", type: "", required: true, unique: false, default: "" }]);
       defaultGlobal();
     }
-  }, [globalArray, index, defaultGlobal]);
+  }, [globalArray, index, defaultGlobal, models]);
 
+  const modelChangeHandler = (e) => {
+    setModelName(e.target.value); 
+    const updatedModels = [...models];
+    updatedModels[index] = e.target.value;
+    setModels(updatedModels);
+  };
   return (
     <>
-      <h1 style={{ textAlign: "center" }}>Fields</h1>
+      <h1 style={{ textAlign: "center" }}>Model {index+1}</h1>
       <form>
         <table style={{ margin: "auto" }}>
           <thead>
+            <tr>
+              <td>
+                <label htmlFor="modelName">Model Name:</label>
+              </td>
+              <td>
+                <input type="text" id="modelName" name="modelName" onChange={(e)=>modelChangeHandler(e)} value={modelName}/>
+              </td>
+              </tr>
             <tr>
               <th style={styles.tableHeader}>Field Name</th>
               <th style={styles.tableHeader}>Type</th>

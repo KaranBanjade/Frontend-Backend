@@ -1,9 +1,39 @@
-import React, {useState } from "react";
+// {
+//   "connObj": {
+//     "name": "hackaminer",
+//     "user": "facproadmin",
+//     "pass": "#facproRDS2022#",
+//     "host": "database-1.czb0dk8ckwzf.us-east-1.rds.amazonaws.com"
+//   },
+//   "models": [
+//     {
+//       "name": "ModelName",
+//       "fieldsObject": {
+//         "fieldName": {
+//           "type": "UUID",
+//           "allowNull": "false",
+//           "primaryKey": "true",
+//           "defaultValue": "UUIDV4"
+//         },
+//         "fieldName": {
+//           "type": "STRING",
+//           "allowNull": "false",
+//           "primaryKey": "false",
+//           "defaultValue": ""
+//         }
+//       }
+//     }
+//   ]
+// }
+
+
+
+import React, {useEffect, useState } from "react";
 import "./CreateProjectPage.css";
 import Components from "../../components";
 // import SidebarComponent from "../../components/SidebarComponent/SidebarComponent";
 
-const { BeginFormComponent, DatabaseFormComponent, SingleModelFieldsFormComponent, SubmitComponent } = Components;
+const { BeginFormComponent, DatabaseFormComponent, SingleModelFieldsFormComponent, SubmitComponent, WelcomeComponent} = Components;
 
 const CreateProjectPage = () => {
   const [counter, setCounter] = useState(0);
@@ -11,6 +41,15 @@ const CreateProjectPage = () => {
   const [projectSettings, setProjectSettings] = useState({});
   const [databaseSettings, setDatabaseSettings] = useState({});
   const [submit, setSubmit] = useState(false);
+  const [models, setModels] = useState([]);
+
+  useEffect(() => {
+    if(counter>2){
+      if(models.length<globalArray.length){
+        setModels(prev => [...prev, ""])
+      }
+    }
+  },[counter])
 
   const filterGlobal = (index, fields) => {
     setGlobalArray(prev => {
@@ -19,7 +58,7 @@ const CreateProjectPage = () => {
   };
 
   const defaultGlobal = () => {
-    setGlobalArray(prev => [...prev, [{ name: "", type: " ", required: true, unique: false, default: "" }]]);
+    setGlobalArray(prev => [...prev, [{ name: "", type: " ", required: true, unique: false, default: ""}]]);
   };
 
   const handleNext = () => {
@@ -38,6 +77,11 @@ const CreateProjectPage = () => {
     setSubmit(prev => !prev);
     // API call here
     if (submit) {
+      const data = {
+        connObj: databaseSettings,
+        models: globalArray,
+      };
+      console.log(data);
       alert("Download Started");
     } else {
       alert("Submitted");
@@ -51,13 +95,14 @@ const CreateProjectPage = () => {
   const returnForms = () => {
     switch (counter) {
       case 0:
-        return <BeginFormComponent projectSettings={projectSettings} setProjectSettings={setProjectSettings} />;
+        // return <BeginFormComponent projectSettings={projectSettings} setProjectSettings={setProjectSettings} />;
+        return <WelcomeComponent/>;
       case 1:
         return <DatabaseFormComponent databaseSettings={databaseSettings} setDatabaseSettings={setDatabaseSettings} />;
       case 2:
-        return <SingleModelFieldsFormComponent globalArray={globalArray} setGlobalArray={setGlobalArray} index={0} filterGlobal={filterGlobal} defaultGlobal={defaultGlobal} />;
+        return <SingleModelFieldsFormComponent globalArray={globalArray} setGlobalArray={setGlobalArray} index={0} filterGlobal={filterGlobal} defaultGlobal={defaultGlobal} models={models} setModels={setModels} />;
       default:
-        return <SingleModelFieldsFormComponent globalArray={globalArray} setGlobalArray={setGlobalArray} index={counter - 2} filterGlobal={filterGlobal} defaultGlobal={defaultGlobal} />;
+        return <SingleModelFieldsFormComponent globalArray={globalArray} setGlobalArray={setGlobalArray} index={counter - 2} filterGlobal={filterGlobal} defaultGlobal={defaultGlobal} models={models} setModels={setModels}/>;
     }
   };
 
