@@ -1,33 +1,3 @@
-// {
-//   "connObj": {
-//     "name": "hackaminer",
-//     "user": "facproadmin",
-//     "pass": "#facproRDS2022#",
-//     "host": "database-1.czb0dk8ckwzf.us-east-1.rds.amazonaws.com"
-//   },
-//   "models": [
-//     {
-//       "name": "ModelName",
-//       "fieldsObject": {
-//         "fieldName": {
-//           "type": "UUID",
-//           "allowNull": "false",
-//           "primaryKey": "true",
-//           "defaultValue": "UUIDV4"
-//         },
-//         "fieldName": {
-//           "type": "STRING",
-//           "allowNull": "false",
-//           "primaryKey": "false",
-//           "defaultValue": ""
-//         }
-//       }
-//     }
-//   ]
-// }
-
-
-
 import React, {useEffect, useState } from "react";
 import "./CreateProjectPage.css";
 import Components from "../../components";
@@ -36,6 +6,43 @@ import SidebarComponent from "../../components/SidebarComponent/SidebarComponent
 const { BeginFormComponent, DatabaseFormComponent, SingleModelFieldsFormComponent, SubmitComponent, WelcomeComponent} = Components;
 
 const CreateProjectPage = () => {
+  const prevData = {
+    "connObj": {
+        "dbname": "Database",
+        "dbtype": "PostgreSQL",
+        "dbhost": "localhost",
+        "dbport": "3306",
+        "dbusername": "Karan",
+        "dbpassword": "Password"
+    },
+    "models": [
+        {
+            "name": "Model",
+            "fieldsObject": {
+                "Field": {
+                    "type": "number",
+                    "allowNull": true,
+                    "defaultValue": "Default field"
+                },
+                "Field2": {
+                    "type": "boolean",
+                    "allowNull": true,
+                    "defaultValue": "Default Field2"
+                }
+            }
+        },
+        {
+            "name": "Model2",
+            "fieldsObject": {
+                "Karan": {
+                    "type": "date",
+                    "allowNull": true,
+                    "defaultValue": "Banjade"
+                }
+            }
+        }
+    ]
+}
   const [counter, setCounter] = useState(0);
   const [globalArray, setGlobalArray] = useState([]);
   const [projectSettings, setProjectSettings] = useState({});
@@ -43,6 +50,17 @@ const CreateProjectPage = () => {
   const [submit, setSubmit] = useState(false);
   const [models, setModels] = useState([]);
   const [apiObject, setApiObject] = useState({});
+  const buildStatesFromData = (data) => {
+    setDatabaseSettings(data.connObj);
+    setModels(data.models.map(model => model.name));
+    setGlobalArray(data.models.map(model => Object.entries(model.fieldsObject).map(field => ({name: field[0], type: field[1].type, required: field[1].allowNull==="false", unique: field[1].primaryKey==="true", default: field[1].defaultValue}))));
+  };
+  useEffect(() => {
+    buildStatesFromData(prevData);
+    console.log("ga",globalArray);
+    console.log("ds",databaseSettings);
+    console.log("m",models);
+  },[])
   useEffect(() => {
     if(counter>2){
       if(models.length<globalArray.length){
@@ -50,7 +68,6 @@ const CreateProjectPage = () => {
       }
     }
   },[counter])
-
   const filterGlobal = (index, fields) => {
     setGlobalArray(prev => {
       return prev.map((value, key) => (key === index ? fields : value));
@@ -111,7 +128,7 @@ const CreateProjectPage = () => {
         connObj: databaseSettings,
         models: data,
       });
-
+      console.log(apiObject);
       alert("Download Started");
     } else {
       alert("Submitted");
