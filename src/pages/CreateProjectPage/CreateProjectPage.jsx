@@ -42,7 +42,7 @@ const CreateProjectPage = () => {
   const [databaseSettings, setDatabaseSettings] = useState({});
   const [submit, setSubmit] = useState(false);
   const [models, setModels] = useState([]);
-
+  const [apiObject, setApiObject] = useState({});
   useEffect(() => {
     if(counter>2){
       if(models.length<globalArray.length){
@@ -83,22 +83,6 @@ const CreateProjectPage = () => {
     setGlobalArray(updatedGlobalArray);
     setCounter(prev => prev - 1);
   };
-    //       "name": "ModelName",
-    //       "fieldsObject": {
-    //         "fieldName": {
-    //           "type": "UUID",
-    //           "allowNull": "false",
-    //           "primaryKey": "true",
-    //           "defaultValue": "UUIDV4"
-    //         },
-    //         "fieldName": {
-    //           "type": "STRING",
-    //           "allowNull": "false",
-    //           "primaryKey": "false",
-    //           "defaultValue": ""
-    //         }
-    //       }
-    //     }
   const handleSubmit = () => {
     setSubmit(prev => !prev);
     // API call here
@@ -122,14 +106,16 @@ const CreateProjectPage = () => {
         };
       })
       console.log(data);
+
+      setApiObject({
+        connObj: databaseSettings,
+        models: data,
+      });
+
       alert("Download Started");
     } else {
       alert("Submitted");
-    }
-
-    console.log("Project Settings: ", projectSettings);
-    console.log("Database Settings: ", databaseSettings);
-    console.log("Global Array: ", globalArray);
+    }``
   };
 
   const returnForms = () => {
