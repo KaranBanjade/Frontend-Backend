@@ -1,26 +1,61 @@
-const SidebarComponent = (props) => {
-    return (
-        <div className="sidebar">
-            <ul className="list">
-                <li className="list-item">
-                    <i className="fas fa-home"></i>
-                    <span>Project Settings</span>
-                </li>
-                <li className="list-item">
-                    <i className="fas fa-info-circle"></i>
-                    <span>Database Settings</span>
-                </li>
-                <li className="list-item">
-                    <i className="fas fa-address-book"></i>
-                    <span>Models</span>
-                    <ul>
-                        
-                    </ul>
-                </li>
-            </ul>
-        </div>
+import React from 'react';
+import './SidebarComponent.css';
+const SidebarComponent = ({ models, setCounter }) => {
 
-    )
-}
+  return (
+    <div className="sidebar" style={{
+        width: "20%",
+    }}>
+      <ul className="list" style={{
+        listStyle: "square",
+      }}>
+        <li className="list-item" >
+            <button style={styles.button}>
+                Database Settings
+          </button>
+        </li>
+        <li className="list-item">
+          <button style={{
+            // margin: "10px auto",
+            padding: "5px 10px",
+            borderRadius: "5px",
+            backgroundColor: "#007bff",
+            color: "#fff",
+            border: "none",
+            cursor: "default",
+            fontWeight: "bold",
+          }}
+          >
+            Models
+            </button>
+          <ol className="model-list">
+            {models.map((model, index) => (
+                <li >
+                <button style={styles.button} key={index} onClick={() => setCounter(index + 2)}>
+                {model}
+              </button>
+              </li>
+            ))}
+          </ol>
+        </li>
+      </ul>
+    </div>
+  );
+};
 
-export default SidebarComponent
+const styles = {
+    button: {
+      margin: "10px 0px",
+      padding: "5px 10px",
+      borderRadius: "5px",
+      backgroundColor: "#007bff",
+      color: "#fff",
+      border: "none",
+      cursor: "pointer",
+      fontWeight: "bold",
+      display: "block",
+      width: "13em",
+    }
+};
+
+export default SidebarComponent;

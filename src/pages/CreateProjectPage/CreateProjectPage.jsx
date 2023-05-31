@@ -31,7 +31,7 @@
 import React, {useEffect, useState } from "react";
 import "./CreateProjectPage.css";
 import Components from "../../components";
-// import SidebarComponent from "../../components/SidebarComponent/SidebarComponent";
+import SidebarComponent from "../../components/SidebarComponent/SidebarComponent";
 
 const { BeginFormComponent, DatabaseFormComponent, SingleModelFieldsFormComponent, SubmitComponent, WelcomeComponent} = Components;
 
@@ -115,7 +115,7 @@ const CreateProjectPage = () => {
       alert("Download Started");
     } else {
       alert("Submitted");
-    }``
+    }
   };
 
   const returnForms = () => {
@@ -134,7 +134,7 @@ const CreateProjectPage = () => {
 
   return (
     <div className="create-content">
-      {/* <SidebarComponent className="sidebar" setCounter={setCounter} /> */}
+      <SidebarComponent className="sidebar" setCounter={setCounter} models={models} />
       <div>
         {!submit ? (
           returnForms()
