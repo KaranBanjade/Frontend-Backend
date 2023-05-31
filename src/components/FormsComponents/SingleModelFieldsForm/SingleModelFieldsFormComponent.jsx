@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import TabelFormComponent from "../../TableFormComponent/TableFormComponent";
 
-const SingleModelFieldsFormComponent = ({ globalArray, index, filterGlobal, defaultGlobal, models, setModels }) => {
+const SingleModelFieldsFormComponent = ({ globalArray, index, filterGlobal, defaultGlobal, models, setModels, handleDeleteModel }) => {
   const [fields, setFields] = useState([]);
   const [modelName, setModelName] = useState(""); // New state variable for modelName
 
@@ -22,6 +22,7 @@ const SingleModelFieldsFormComponent = ({ globalArray, index, filterGlobal, defa
     updatedModels[index] = e.target.value;
     setModels(updatedModels);
   };
+
   return (
     <>
       <h1 style={{ textAlign: "center" }}>Model {index+1}</h1>
@@ -35,6 +36,10 @@ const SingleModelFieldsFormComponent = ({ globalArray, index, filterGlobal, defa
               <td>
                 <input type="text" id="modelName" name="modelName" onChange={(e)=>modelChangeHandler(e)} value={modelName}/>
               </td>
+              {
+                models.length > 1&& <td>
+                <button style={styles.saveButton} onClick={(e) => { handleDeleteModel(e, index); }} > Delete Model </button>
+              </td>}
               </tr>
             <tr>
               <th style={styles.tableHeader}>Field Name</th>

@@ -73,14 +73,54 @@ const CreateProjectPage = () => {
     setCounter(prev => prev - 1);
   };
 
+  const handleDeleteModel = (e, index) => {
+    e.preventDefault();
+    const updatedModels = [...models];
+    updatedModels.splice(index, 1);
+    setModels(updatedModels);
+    const updatedGlobalArray = [...globalArray];
+    updatedGlobalArray.splice(index, 1);
+    setGlobalArray(updatedGlobalArray);
+    setCounter(prev => prev - 1);
+  };
+    //       "name": "ModelName",
+    //       "fieldsObject": {
+    //         "fieldName": {
+    //           "type": "UUID",
+    //           "allowNull": "false",
+    //           "primaryKey": "true",
+    //           "defaultValue": "UUIDV4"
+    //         },
+    //         "fieldName": {
+    //           "type": "STRING",
+    //           "allowNull": "false",
+    //           "primaryKey": "false",
+    //           "defaultValue": ""
+    //         }
+    //       }
+    //     }
   const handleSubmit = () => {
     setSubmit(prev => !prev);
     // API call here
     if (submit) {
-      const data = {
-        connObj: databaseSettings,
-        models: globalArray,
-      };
+      const data = []
+      console.log(data);
+
+      globalArray.forEach((model, index) => {
+        const fieldsObject = {};
+        model.forEach(field => {
+          fieldsObject[field.name] = {
+            type: field.type,
+            allowNull: field.required,
+            primaryKey: field.primary,
+            defaultValue: field.default,
+          };
+        });
+        data[index] = {
+          name: models[index],
+          fieldsObject,
+        };
+      })
       console.log(data);
       alert("Download Started");
     } else {
@@ -100,9 +140,9 @@ const CreateProjectPage = () => {
       case 1:
         return <DatabaseFormComponent databaseSettings={databaseSettings} setDatabaseSettings={setDatabaseSettings} />;
       case 2:
-        return <SingleModelFieldsFormComponent globalArray={globalArray} setGlobalArray={setGlobalArray} index={0} filterGlobal={filterGlobal} defaultGlobal={defaultGlobal} models={models} setModels={setModels} />;
+        return <SingleModelFieldsFormComponent globalArray={globalArray} setGlobalArray={setGlobalArray} index={0} filterGlobal={filterGlobal} defaultGlobal={defaultGlobal} models={models} setModels={setModels} handleDeleteModel = {handleDeleteModel}/>;
       default:
-        return <SingleModelFieldsFormComponent globalArray={globalArray} setGlobalArray={setGlobalArray} index={counter - 2} filterGlobal={filterGlobal} defaultGlobal={defaultGlobal} models={models} setModels={setModels}/>;
+        return <SingleModelFieldsFormComponent globalArray={globalArray} setGlobalArray={setGlobalArray} index={counter - 2} filterGlobal={filterGlobal} defaultGlobal={defaultGlobal} models={models} setModels={setModels} handleDeleteModel = {handleDeleteModel}/>;
     }
   };
 
@@ -113,7 +153,7 @@ const CreateProjectPage = () => {
         {!submit ? (
           returnForms()
         ) : (
-          <SubmitComponent projectSettings={projectSettings} databaseSettings={databaseSettings} globalArray={globalArray} />
+          <SubmitComponent projectSettings={projectSettings} databaseSettings={databaseSettings} globalArray={globalArray} models = {models}/>
         )}
         <div className="buttonsFooter" style={styles.buttonsFooter}>
           {submit || <button style={styles.button} onClick={handleNext}>Next</button>}

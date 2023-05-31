@@ -1,6 +1,6 @@
 import React from "react";
 import "./SubmitComponent.css";
-const SubmitComponent = ({ projectSettings, databaseSettings, globalArray }) => {
+const SubmitComponent = ({ projectSettings, databaseSettings, globalArray,models }) => {
   return (
     <div className="submit-component">
       <h1>Overview Of Project</h1>
@@ -61,11 +61,13 @@ const SubmitComponent = ({ projectSettings, databaseSettings, globalArray }) => 
           <thead>
             <tr>
               <th colSpan={2}>
-                <h2>Table {index + 1}</h2>
+                <h2>{models[index]}</h2>
               </th>
             </tr>
           </thead>
           <tbody>
+            <tr>
+              <td>
             {table.map((field, index) => (
               <table key={index} >
                 <thead>
@@ -101,6 +103,8 @@ const SubmitComponent = ({ projectSettings, databaseSettings, globalArray }) => 
                 </tbody>
               </table>
             ))}
+            </td>
+            </tr>
           </tbody>
         </table>
       ))}
