@@ -10,7 +10,7 @@ const SidebarComponent = ({ models, setCounter }) => {
         listStyle: "square",
       }}>
         <li className="list-item" >
-            <button style={styles.button}>
+            <button style={styles.button} onClick={()=>setCounter(1)}>
                 Database Settings
           </button>
         </li>
