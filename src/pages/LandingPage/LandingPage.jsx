@@ -92,7 +92,7 @@ const LandingPage = () => {
           <p>
             Start using [Project Name] today and simplify your backend development process. Experience the benefits of automated code generation and accelerate your project's progress.
           </p>
-          <a style={ctaButtonStyle} href="/user" >Get Started</a>
+          <a style={ctaButtonStyle} href="/login" >Get Started</a>
         </div>
       </div>
     </div>
