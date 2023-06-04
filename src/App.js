@@ -20,7 +20,8 @@ function App() {
       <Route path='/' >
         <Route index element={<LandingPage />} />
         <Route path = "login" element={<LoginPage />} />
-        <Route path="profile" element={<SecureRoutes component={<ProfilePage/>} />} />
+        {/* <Route path="profile" element={<SecureRoutes component={<ProfilePage/>} />} /> */}
+        <Route path="profile" element={<ProfilePage/>} />
         <Route path="dashboard" element={<DashboardPage/>} />
         {/* <Route path="addnewbackend" element={< SecureRoutes component={<CreateProjectPage/> } />} /> */}
         <Route path="addnewbackend" element={<CreateProjectPage/>} />
