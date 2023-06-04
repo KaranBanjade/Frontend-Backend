@@ -1,134 +1,95 @@
 import React, { useState } from "react";
+import AuthFunction from "../../functions/auth";
 
-const RegisterComponent = ({setLogin}) => {
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+
+const RegisterComponent = ({ setLogin }) => {
+  const initialCredentials = {
+    username: "",
+    name: "dummy",
+    email: "",
+    number: "9999999999",
+    password: "",
+    confirmPassword: "",
+  };
+  const [credentials, setCredentials] = useState(initialCredentials);
 
   const handleRegister = (e) => {
     e.preventDefault();
-    // Perform registration logic here
+    AuthFunction.SignupFunction(credentials);    
   };
+
   const handleLogin = (e) => {
     e.preventDefault();
     setLogin(true);
-  }
+  };
+
   return (
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        height: "100vh",
-        backgroundColor: "#f5f5f5",
-      }}
-    >
-      <form
-        style={{
-          width: "400px",
-          padding: "30px",
-          borderRadius: "5px",
-          backgroundColor: "#ffffff",
-          boxShadow: "0px 2px 10px rgba(0, 0, 0, 0.1)",
-        }}
-        onSubmit={handleRegister}
-      >
-        <h1
-          style={{
-            marginBottom: "30px",
-            textAlign: "center",
-            color: "#333333",
-          }}
-        >
-          Register
-        </h1>
+    <div style={formContainerStyle}>
+      <form style={formStyle} onSubmit={handleRegister}>
+        <h1 style={headingStyle}>Register</h1>
         <div style={{ marginBottom: "20px" }}>
-          <label
-            htmlFor="username"
-            style={{ display: "block", marginBottom: "5px", color: "#555555" }}
-          >
+          <label htmlFor="username" style={labelStyle}>
             Username
           </label>
           <input
             type="text"
             id="username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            style={{
-              width: "100%",
-              padding: "10px",
-              borderRadius: "3px",
-              border: "1px solid #cccccc",
-            }}
+            value={credentials.username}
+            onChange={(e) =>
+              setCredentials({ ...credentials, username: e.target.value })
+            }
+            {...inputProps}
           />
         </div>
         <div style={{ marginBottom: "20px" }}>
-          <label
-            htmlFor="email"
-            style={{ display: "block", marginBottom: "5px", color: "#555555" }}
-          >
+          <label htmlFor="email" style={labelStyle}>
             Email
           </label>
           <input
             type="email"
             id="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            style={{
-              width: "100%",
-              padding: "10px",
-              borderRadius: "3px",
-              border: "1px solid #cccccc",
-            }}
+            value={credentials.email}
+            onChange={(e) =>
+              setCredentials({ ...credentials, email: e.target.value })
+            }
+            {...inputProps}
           />
         </div>
         <div style={{ marginBottom: "20px" }}>
-          <label
-            htmlFor="password"
-            style={{ display: "block", marginBottom: "5px", color: "#555555" }}
-          >
+          <label htmlFor="password" style={labelStyle}>
             Password
           </label>
           <input
             type="password"
             id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            style={{
-              width: "100%",
-              padding: "10px",
-              borderRadius: "3px",
-              border: "1px solid #cccccc",
-            }}
+            value={credentials.password}
+            onChange={(e) =>
+              setCredentials({ ...credentials, password: e.target.value })
+            }
+            {...inputProps}
           />
         </div>
         <div style={{ marginBottom: "20px" }}>
-          <label
-            htmlFor="confirmPassword"
-            style={{ display: "block", marginBottom: "5px", color: "#555555" }}
-          >
+          <label htmlFor="confirmPassword" style={labelStyle}>
             Confirm Password
           </label>
           <input
             type="password"
             id="confirmPassword"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-            style={{
-              width: "100%",
-              padding: "10px",
-              borderRadius: "3px",
-              border: "1px solid #cccccc",
-            }}
+            value={credentials.confirmPassword}
+            onChange={(e) =>
+              setCredentials({
+                ...credentials,
+                confirmPassword: e.target.value,
+              })
+            }
+            {...inputProps}
           />
         </div>
         <button
           type="submit"
           style={{
-            width: "100%",
-            padding: "10px",
-            borderRadius: "3px",
+            ...inputStyle,
             backgroundColor: "#007bff",
             color: "#ffffff",
             border: "none",
@@ -137,17 +98,61 @@ const RegisterComponent = ({setLogin}) => {
         >
           Register
         </button>
-        <a href="/" style={{
+        <a
+          href="/"
+          style={{
             paddingTop: "20px",
             border: "none",
             cursor: "pointer",
             textDecoration: "none",
             color: "#007bff",
-            
-        }} onClick={(e)=>handleLogin(e)}>Login</a>
+          }}
+          onClick={handleLogin}
+        >
+          Login
+        </a>
       </form>
     </div>
   );
+};
+
+const inputStyle = {
+  width: "100%",
+  padding: "10px",
+  borderRadius: "3px",
+  border: "1px solid #cccccc",
+};
+
+const labelStyle = {
+  display: "block",
+  marginBottom: "5px",
+  color: "#555555",
+};
+
+const formContainerStyle = {
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  height: "100vh",
+  backgroundColor: "#f5f5f5",
+};
+
+const formStyle = {
+  width: "400px",
+  padding: "30px",
+  borderRadius: "5px",
+  backgroundColor: "#ffffff",
+  boxShadow: "0px 2px 10px rgba(0, 0, 0, 0.1)",
+};
+
+const headingStyle = {
+  marginBottom: "30px",
+  textAlign: "center",
+  color: "#333333",
+};
+
+const inputProps = {
+  style: inputStyle,
 };
 
 export default RegisterComponent;

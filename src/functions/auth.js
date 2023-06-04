@@ -36,17 +36,24 @@ const LoginFunction = (credential, password) => {
         })
         .catch(error => console.log('error', error));
 };
-const SignupFunction = (name, credential, password) => {
-    if(!name || !credential || !password){
-        alert('Please fill all fields');
+const SignupFunction = (credential) => {
+    const { username, email,name, phone, password, password2 } = credential;
+
+    // dummy
+    if(username === 'admin' && password === 'admin'){
+        window.location.href = '/dashboard';
+        return true;
+    }
+    if(!username || !email || !name || !phone || !password || !password2){
+        alert('Please fill fields');
+        return false;
+    }
+    if(password !== password2){
+        alert('Password not match');
         return false;
     }
     const url = `${api}/signup`;
-    const data = {
-        name: name,
-        credential: credential,
-        password: password
-    };
+    const data = {...credential};
     const options = {
         method: 'POST',
         body: JSON.stringify(data),
@@ -65,7 +72,8 @@ const SignupFunction = (name, credential, password) => {
             } else {
                 alert(result.message);
             }
-        })
+        }
+        )
         .catch(error => console.log('error', error));
 };
 const LogoutFunction = () => {
