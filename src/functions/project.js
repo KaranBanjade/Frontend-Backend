@@ -22,4 +22,30 @@ const DownloadProject = (data) =>{
 // const DownloadFunctions = {
 //   DownloadProject
 // }
-export default DownloadProject;
+const DownloadLastProject = () =>{
+  const api = "http://localhost:3001/project/last";
+  const useId = localStorage.getItem('user');
+  const data = {
+    userId: useId
+  }
+
+  fetch(api, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  })
+    .then((res) => {
+      return res.json();
+    })
+    .then((data) => {
+        console.log(data);
+        DownloadProject(data);
+    });
+}
+const DownloadFunctions = {
+  DownloadProject,
+  DownloadLastProject
+}
+export default DownloadFunctions;
