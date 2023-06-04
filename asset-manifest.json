@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/Frontend-Backend.github.io/Frontend-Backend/static/css/main.11504c64.css",
+    "main.js": "/Frontend-Backend.github.io/Frontend-Backend/static/js/main.3cddb111.js",
+    "index.html": "/Frontend-Backend.github.io/Frontend-Backend/index.html",
+    "main.11504c64.css.map": "/Frontend-Backend.github.io/Frontend-Backend/static/css/main.11504c64.css.map",
+    "main.3cddb111.js.map": "/Frontend-Backend.github.io/Frontend-Backend/static/js/main.3cddb111.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.11504c64.css",
+    "static/js/main.3cddb111.js"
+  ]
+}
