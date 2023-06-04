@@ -4,7 +4,7 @@ import Pages from './pages';
 import Components from './components';
 import { BrowserRouter , Routes, Route } from 'react-router-dom';
 const { LoginPage, DashboardPage, CreateProjectPage,LandingPage,ProfilePage } = Pages;
-const { NavbarComponent } = Components;
+const { NavbarComponent, SecureRoutes } = Components;
 function App() {
   return (
     <div className="App">
@@ -19,10 +19,10 @@ function App() {
       <Routes>
       <Route path='/' >
         <Route index element={<LandingPage />} />
-        <Route path = "user" element={<LoginPage />} />
-        <Route path="profile" element={<ProfilePage/>} />
+        <Route path = "login" element={<LoginPage />} />
+        <Route path="profile" element={<SecureRoutes component={<ProfilePage/>} />} />
         <Route path="dashboard" element={<DashboardPage/>} />
-        <Route path="addnewbackend" element={<CreateProjectPage/>} />
+        <Route path="addnewbackend" element={< SecureRoutes component={<CreateProjectPage/> } />} />
       </Route>
       </Routes>
       </BrowserRouter>
