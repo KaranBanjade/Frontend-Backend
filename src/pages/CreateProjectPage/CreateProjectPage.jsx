@@ -1,48 +1,70 @@
 import React, {useEffect, useState } from "react";
+import { useLocation } from "react-router";
 import "./CreateProjectPage.css";
 import Components from "../../components";
 import SidebarComponent from "../../components/SidebarComponent/SidebarComponent";
 
 const { BeginFormComponent, DatabaseFormComponent, SingleModelFieldsFormComponent, SubmitComponent, WelcomeComponent} = Components;
 
-const CreateProjectPage = () => {
-  const prevData = {
-    "connObj": {
-        "dbname": "Database",
-        "dbtype": "PostgreSQL",
-        "dbhost": "localhost",
-        "dbport": "3306",
-        "dbusername": "Karan",
-        "dbpassword": "Password"
+const apiCall = (data) => {
+  const api = "http://localhost:3001/test";
+  fetch(api, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
     },
-    "models": [
-        {
-            "name": "Model",
-            "fieldsObject": {
-                "Field": {
-                    "type": "number",
-                    "allowNull": true,
-                    "defaultValue": "Default field"
-                },
-                "Field2": {
-                    "type": "boolean",
-                    "allowNull": true,
-                    "defaultValue": "Default Field2"
-                }
-            }
-        },
-        {
-            "name": "Model2",
-            "fieldsObject": {
-                "Karan": {
-                    "type": "date",
-                    "allowNull": true,
-                    "defaultValue": "Banjade"
-                }
-            }
-        }
-    ]
-}
+    body: JSON.stringify(data),
+  })
+    .then(res => res.blob())
+    .then(blob => {
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "download.zip";
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+    }
+    );
+};
+const CreateProjectPage = () => {
+//   const prevData = {
+//     "connObj": {
+//         "dbname": "Database",
+//         "dbtype": "PostgreSQL",
+//         "dbhost": "localhost",
+//         "dbport": "3306",
+//         "dbusername": "Karan",
+//         "dbpassword": "Password"
+//     },
+//     "models": [
+//         {
+//             "name": "Model",
+//             "fieldsObject": {
+//                 "Field": {
+//                     "type": "number",
+//                     "allowNull": true,
+//                     "defaultValue": "Default field"
+//                 },
+//                 "Field2": {
+//                     "type": "boolean",
+//                     "allowNull": true,
+//                     "defaultValue": "Default Field2"
+//                 }
+//             }
+//         },
+//         {
+//             "name": "Model2",
+//             "fieldsObject": {
+//                 "Karan": {
+//                     "type": "date",
+//                     "allowNull": true,
+//                     "defaultValue": "Banjade"
+//                 }
+//             }
+//         }
+//     ]
+// }
   const [counter, setCounter] = useState(0);
   const [globalArray, setGlobalArray] = useState([]);
   const [projectSettings, setProjectSettings] = useState({});
@@ -50,16 +72,23 @@ const CreateProjectPage = () => {
   const [submit, setSubmit] = useState(false);
   const [models, setModels] = useState([]);
   const [apiObject, setApiObject] = useState({});
+  const location = useLocation();
   const buildStatesFromData = (data) => {
     setDatabaseSettings(data.connObj);
     setModels(data.models.map(model => model.name));
     setGlobalArray(data.models.map(model => Object.entries(model.fieldsObject).map(field => ({name: field[0], type: field[1].type, required: field[1].allowNull==="false", unique: field[1].primaryKey==="true", default: field[1].defaultValue}))));
   };
   useEffect(() => {
-    buildStatesFromData(prevData);
-    console.log("ga",globalArray);
-    console.log("ds",databaseSettings);
-    console.log("m",models);
+    // recieve data from previous page using location
+    const prevData = location?.state?.prevData;
+    if(prevData){
+      buildStatesFromData(prevData);
+    }
+    // buildStatesFromData(prevData);
+    // console.log("ga",globalArray);
+    // console.log("ds",databaseSettings);
+    // console.log("m",models);
+    // apiCall(prevData);
   },[])
   useEffect(() => {
     if(counter>2){
@@ -105,7 +134,7 @@ const CreateProjectPage = () => {
     // API call here
     if (submit) {
       const data = []
-      console.log(data);
+      // console.log(data);
 
       globalArray.forEach((model, index) => {
         const fieldsObject = {};
@@ -128,10 +157,10 @@ const CreateProjectPage = () => {
         connObj: databaseSettings,
         models: data,
       });
-      console.log(apiObject);
-      alert("Download Started");
+      alert("Downloading...");
+      apiCall(apiObject);
     } else {
-      alert("Submitted");
+      alert("Not Submit");
     }
   };
 
@@ -162,7 +191,7 @@ const CreateProjectPage = () => {
           {submit || <button style={styles.button} onClick={handleNext}>Next</button>}
           {counter > 0 && <button style={styles.button} onClick={handleBack}>Back</button>}
           {counter >= 2 && (
-            <button style={styles.button} onClick={handleSubmit}>{submit ? "Finish" : "Submit"}</button>
+            <button style={styles.button} onClick={handleSubmit}>{submit ? "Download" : "Overview"}</button>
           )}
         </div>
       </div>
