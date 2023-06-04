@@ -3,30 +3,9 @@ import { useLocation } from "react-router";
 import "./CreateProjectPage.css";
 import Components from "../../components";
 import SidebarComponent from "../../components/SidebarComponent/SidebarComponent";
-
+import DownloadProject from "../../functions/project";
 const { BeginFormComponent, DatabaseFormComponent, SingleModelFieldsFormComponent, SubmitComponent, WelcomeComponent} = Components;
 
-const apiCall = (data) => {
-  const api = "http://localhost:3001/test";
-  fetch(api, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(data),
-  })
-    .then(res => res.blob())
-    .then(blob => {
-      const url = window.URL.createObjectURL(blob);
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = "download.zip";
-      document.body.appendChild(a);
-      a.click();
-      a.remove();
-    }
-    );
-};
 const CreateProjectPage = () => {
 //   const prevData = {
 //     "connObj": {
@@ -158,7 +137,7 @@ const CreateProjectPage = () => {
         models: data,
       });
       alert("Downloading...");
-      apiCall(apiObject);
+      DownloadProject(apiObject);
     } else {
       alert("Not Submit");
     }

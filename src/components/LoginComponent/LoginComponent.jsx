@@ -1,18 +1,20 @@
 import React, { useState } from "react";
-
+import AuthFunction from "../../functions/auth";
+import { set } from "lodash";
 const LoginComponent = ({setLogin}) => {
-  const [username, setUsername] = useState("");
+  const [credential, setCredential] = useState("");
   const [password, setPassword] = useState("");
 
   const handleLogin = (e) => {
     e.preventDefault();
-    // Perform login logic here
+    AuthFunction.LoginFunction(credential, password);
   };
 
-  const handleRegister = (e) => {
+  const handleChange = (e) => {
     e.preventDefault();
     setLogin(false);
   }
+  
   return (
     <div
       style={{
@@ -31,7 +33,6 @@ const LoginComponent = ({setLogin}) => {
           backgroundColor: "#ffffff",
           boxShadow: "0px 2px 10px rgba(0, 0, 0, 0.1)",
         }}
-        onSubmit={handleLogin}
       >
         <h1
           style={{
@@ -44,16 +45,16 @@ const LoginComponent = ({setLogin}) => {
         </h1>
         <div style={{ marginBottom: "20px" }}>
           <label
-            htmlFor="username"
+            htmlFor="credential"
             style={{ display: "block", marginBottom: "5px", color: "#555555" }}
           >
-            Username
+            Credential
           </label>
           <input
             type="text"
-            id="username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
+            id="credential"
+            value={credential}
+            onChange={(e) => setCredential(e.target.value)}
             style={{
               width: "100%",
               padding: "10px",
@@ -93,6 +94,7 @@ const LoginComponent = ({setLogin}) => {
             border: "none",
             cursor: "pointer",
           }}
+          onClick={(e) => handleLogin(e)}
         >
           Login
         </button>
@@ -103,7 +105,7 @@ const LoginComponent = ({setLogin}) => {
             textDecoration: "none",
             color: "#007bff",
             
-        }} onClick={(e)=>handleRegister(e)}>Register</a>
+        }} onClick={(e)=>handleChange(e)}>Register</a>
       </form>
     </div>
   );
