@@ -5,6 +5,7 @@ import TableFormComponent from './TableFormComponent/TableFormComponent';
 import SubmitComponent from './SubmitComponent/SubmitComponent';
 import NavbarComponent from './NavbarComponent/NavbarComponent';
 import SecureRoutes from './SecureRoutes';
+import ViewAllComponentsList from './ViewAllComponents/ViewAllComponentsList';
 const Components = {
     LoginComponent,
     RegisterComponent,
@@ -12,6 +13,7 @@ const Components = {
     SubmitComponent,
     NavbarComponent,
     SecureRoutes,
+    ViewAllComponentsList,
     ...FormComponents
 };
 

@@ -4,7 +4,7 @@ const SecureRoutes = ({component}) => {
     const token = localStorage.getItem("token");
     const navigate = useNavigate();
     useEffect(() => {
-        if (token) {
+        if (!token) {
             navigate('/login', { replace: true });
         }
     }, []);

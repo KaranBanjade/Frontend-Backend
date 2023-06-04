@@ -22,7 +22,10 @@ const DownloadProject = (data) =>{
 // const DownloadFunctions = {
 //   DownloadProject
 // }
-const DownloadLastProject = () =>{
+const DownloadLastProject = (e) =>{
+  e.preventDefault();
+  alert("Download Last Project")
+  return;
   const api = "http://localhost:3001/project/last";
   const useId = localStorage.getItem('user');
   const data = {

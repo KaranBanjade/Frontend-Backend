@@ -9,10 +9,10 @@ const DashboardPage = () => {
         <a href="/addnewbackend" style={buttonStyle}>
           Create New
         </a>
-        <a href="/downloadlastbackend" style={buttonStyle} onClick={(e)=>{DownloadFunctions.downloadLastAction(e)}}>
+        <a style={buttonStyle} onClick={(e)=>{DownloadFunctions.DownloadLastProject(e)}}>
           Download Last
         </a>
-        <a href="/viewallbackends" style={buttonStyle}>
+        <a href="/viewallprojects" style={buttonStyle}>
           View All
         </a>
         <a href="/profile" style={buttonStyle}>
