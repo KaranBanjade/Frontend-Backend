@@ -3,9 +3,30 @@ import { useLocation } from "react-router";
 import "./CreateProjectPage.css";
 import Components from "../../components";
 import SidebarComponent from "../../components/SidebarComponent/SidebarComponent";
-import DownloadProject from "../../functions/project";
+// import DownloadProject from "../../functions/project";
 const { BeginFormComponent, DatabaseFormComponent, SingleModelFieldsFormComponent, SubmitComponent, WelcomeComponent} = Components;
-
+const DownloadProject = (data) =>{
+  // const api = "https://scriptsorcerers-backend.adaptable.app/ ";
+  const api = "http://localhost:5000/addNewBackend"
+fetch(api, {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify(data),
+})
+  .then(res => res.blob())
+  .then(blob => {
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "download.zip";
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+  }
+  );
+}
 const CreateProjectPage = () => {
 //   const prevData = {
 //     "connObj": {
@@ -133,8 +154,9 @@ const CreateProjectPage = () => {
       console.log(data);
 
       setApiObject({
-        connObj: databaseSettings,
-        models: data,
+        userId: "64821ee0e02bb85a07ab27d9",
+          connObj: databaseSettings,
+          models: data,
       });
       alert("Downloading...");
       DownloadProject(apiObject);

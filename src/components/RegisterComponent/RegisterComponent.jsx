@@ -4,12 +4,12 @@ import AuthFunction from "../../functions/auth";
 
 const RegisterComponent = ({ setLogin }) => {
   const initialCredentials = {
-    username: "",
+    username: "dummy User",
     name: "dummy",
     email: "",
     number: "9999999999",
-    password: "",
-    confirmPassword: "",
+    password: "123455",
+    confirmPassword: "123455",
   };
   const [credentials, setCredentials] = useState(initialCredentials);
 

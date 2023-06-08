@@ -1,5 +1,5 @@
 // import process env
-const api = process.env.REACT_APP_API_URL||'http://localhost:3001/';
+const api = process.env.REACT_APP_API_URL||'http://localhost:5000';
 const LoginFunction = (credential, password) => {
     // dummy
     if(credential === 'admin' && password === 'admin'){
@@ -12,7 +12,7 @@ const LoginFunction = (credential, password) => {
     }
     const url = `${api}/login`;
     const data = {
-        credential: credential,
+        credentials: credential,
         password: password
     };
     const options = {
@@ -37,21 +37,21 @@ const LoginFunction = (credential, password) => {
         .catch(error => console.log('error', error));
 };
 const SignupFunction = (credential) => {
-    const { username, email,name, phone, password, password2 } = credential;
-
+    const { username, email,name, number, password, password2 } = credential;
+    console.log(username, email,name, number, password, password2 )
     // dummy
     if(username === 'admin' && password === 'admin'){
         window.location.href = '/dashboard';
         return true;
     }
-    if(!username || !email || !name || !phone || !password || !password2){
+    if(!username || !email || !name || !number ||!password){
         alert('Please fill fields');
         return false;
     }
-    if(password !== password2){
-        alert('Password not match');
-        return false;
-    }
+    // if(password !== password2){
+    //     alert('Password not match');
+    //     return false;
+    // }
     const url = `${api}/signup`;
     const data = {...credential};
     const options = {
