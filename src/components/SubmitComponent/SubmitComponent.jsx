@@ -3,23 +3,6 @@ import "./SubmitComponent.css";
 const SubmitComponent = ({ projectSettings, databaseSettings, globalArray,models }) => {
   return (
     <div className="submit-component">
-      <h1>Overview Of Project</h1>
-      <table className="submit-table">
-        <thead>
-          <tr>
-            <th colSpan={2}>
-              <h2>Project Settings</h2>
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><strong>Project Name:</strong></td>
-            <td>{projectSettings.projectname}</td>
-          </tr>
-        </tbody>
-      </table>
-
       <table className="submit-table">
         <thead>
           <tr>

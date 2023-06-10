@@ -6,7 +6,7 @@ const ProfileComponent = ({changeState, comp}) => {
       <div style={dashboardStyle}>
         <span>
         <h1 style={{ marginBottom: "40px", textAlign: "center" }}>Dashboard</h1>
-        `<button onClick={changeState} style={{
+        <button onClick={changeState} style={{
             width: "100%",
             padding: "20px",
             marginBottom: "20px",
@@ -20,7 +20,7 @@ const ProfileComponent = ({changeState, comp}) => {
             textAlign: "center",
             textTransform: "uppercase",
             textDecoration: "none",
-        }}>{comp}</button>`
+        }}>{comp}</button>
         </span>
         <a href="/addnewbackend" style={buttonStyle}>
           Profile

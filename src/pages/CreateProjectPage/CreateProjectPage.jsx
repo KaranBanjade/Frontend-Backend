@@ -5,7 +5,7 @@ import Components from "../../components";
 import SidebarComponent from "../../components/SidebarComponent/SidebarComponent";
 const {DatabaseFormComponent, SingleModelFieldsFormComponent, SubmitComponent, WelcomeComponent} = Components;
 const DownloadProject = (data) =>{
-  const api = "http://localhost:5000/addNewBackend"
+const api = "http://localhost:5000/addNewBackend"
 fetch(api, {
   method: "POST",
   headers: {
