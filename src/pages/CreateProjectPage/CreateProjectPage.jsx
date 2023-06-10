@@ -113,7 +113,7 @@ const CreateProjectPage = () => {
   };
 
   const defaultGlobal = () => {
-    setGlobalArray(prev => [...prev, [{ name: "", type: " ", required: true, unique: false, default: ""}]]);
+    setGlobalArray(prev => [...prev, [{ name: "", type: " ", required: false, unique: false, default: ""}]]);
   };
 
   const handleNext = () => {
