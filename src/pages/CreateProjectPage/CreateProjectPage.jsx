@@ -3,10 +3,8 @@ import { useLocation } from "react-router";
 import "./CreateProjectPage.css";
 import Components from "../../components";
 import SidebarComponent from "../../components/SidebarComponent/SidebarComponent";
-// import DownloadProject from "../../functions/project";
-const { BeginFormComponent, DatabaseFormComponent, SingleModelFieldsFormComponent, SubmitComponent, WelcomeComponent} = Components;
+const {DatabaseFormComponent, SingleModelFieldsFormComponent, SubmitComponent, WelcomeComponent} = Components;
 const DownloadProject = (data) =>{
-  // const api = "https://scriptsorcerers-backend.adaptable.app/ ";
   const api = "http://localhost:5000/addNewBackend"
 fetch(api, {
   method: "POST",
@@ -28,43 +26,6 @@ fetch(api, {
   );
 }
 const CreateProjectPage = () => {
-//   const prevData = {
-//     "connObj": {
-//         "dbname": "Database",
-//         "dbtype": "PostgreSQL",
-//         "dbhost": "localhost",
-//         "dbport": "3306",
-//         "dbusername": "Karan",
-//         "dbpassword": "Password"
-//     },
-//     "models": [
-//         {
-//             "name": "Model",
-//             "fieldsObject": {
-//                 "Field": {
-//                     "type": "number",
-//                     "allowNull": true,
-//                     "defaultValue": "Default field"
-//                 },
-//                 "Field2": {
-//                     "type": "boolean",
-//                     "allowNull": true,
-//                     "defaultValue": "Default Field2"
-//                 }
-//             }
-//         },
-//         {
-//             "name": "Model2",
-//             "fieldsObject": {
-//                 "Karan": {
-//                     "type": "date",
-//                     "allowNull": true,
-//                     "defaultValue": "Banjade"
-//                 }
-//             }
-//         }
-//     ]
-// }
   const [counter, setCounter] = useState(0);
   const [globalArray, setGlobalArray] = useState([]);
   const [projectSettings, setProjectSettings] = useState({
@@ -88,16 +49,10 @@ const CreateProjectPage = () => {
     setGlobalArray(data.models.map(model => Object.entries(model.fieldsObject).map(field => ({name: field[0], type: field[1].type, required: field[1].allowNull==="false", unique: field[1].primaryKey==="true", default: field[1].defaultValue}))));
   };
   useEffect(() => {
-    // recieve data from previous page using location
     const prevData = location?.state?.prevData;
     if(prevData){
       buildStatesFromData(prevData);
     }
-    // buildStatesFromData(prevData);
-    // console.log("ga",globalArray);
-    // console.log("ds",databaseSettings);
-    // console.log("m",models);
-    // apiCall(prevData);
   },[])
   useEffect(() => {
     if(counter>2){
@@ -140,11 +95,8 @@ const CreateProjectPage = () => {
   };
   const handleSubmit = () => {
     setSubmit(prev => !prev);
-    // API call here
     if (submit) {
       const data = []
-      // console.log(data);
-
       globalArray.forEach((model, index) => {
         const fieldsObject = {};
         model.forEach(field => {
@@ -177,7 +129,6 @@ const CreateProjectPage = () => {
   const returnForms = () => {
     switch (counter) {
       case 0:
-        // return <BeginFormComponent projectSettings={projectSettings} setProjectSettings={setProjectSettings} />;
         return <WelcomeComponent/>;
       case 1:
         return <DatabaseFormComponent databaseSettings={databaseSettings} setDatabaseSettings={setDatabaseSettings} />;
