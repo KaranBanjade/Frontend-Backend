@@ -182,7 +182,10 @@ const CreateProjectPage = () => {
   return (
     <div className="create-content">
       <SidebarComponent className="sidebar" setCounter={setCounter} models={models} />
-      <div>
+      <div id="forms-collection" style={{
+        marginLeft: "100px"
+      }}>
+  
         {!submit ? (
           returnForms()
         ) : (

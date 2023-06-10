@@ -6,6 +6,8 @@ import SubmitComponent from './SubmitComponent/SubmitComponent';
 import NavbarComponent from './NavbarComponent/NavbarComponent';
 import SecureRoutes from './SecureRoutes';
 import ViewAllComponentsList from './ViewAllComponents/ViewAllComponentsList';
+import BackendComponent from './DashboardComponents/BackendComponents';
+import ProfileComponent from './DashboardComponents/ProfileComponnet';
 const Components = {
     LoginComponent,
     RegisterComponent,
@@ -14,6 +16,8 @@ const Components = {
     NavbarComponent,
     SecureRoutes,
     ViewAllComponentsList,
+    BackendComponent,
+    ProfileComponent,
     ...FormComponents
 };
 

@@ -8,12 +8,6 @@ const { NavbarComponent, SecureRoutes } = Components;
 function App() {
   return (
     <div className="App">
-      {/* <BrowserRouter>
-        <Routes>
-          <Route path="/dashboard" element={<DashboardPage />} />
-          <Route path="/" element={<LoginPage />} />
-        </Routes>
-      </BrowserRouter> */}
       <BrowserRouter>
       <NavbarComponent />
       <Routes>

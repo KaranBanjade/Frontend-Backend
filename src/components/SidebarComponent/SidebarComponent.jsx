@@ -8,6 +8,7 @@ const SidebarComponent = ({ models, setCounter }) => {
     }}>
       <ul className="list" style={{
         listStyle: "square",
+        color:"#E0474C"
       }}>
         <li className="list-item" >
             <button style={styles.button} onClick={()=>setCounter(1)}>
@@ -19,7 +20,7 @@ const SidebarComponent = ({ models, setCounter }) => {
             // margin: "10px auto",
             padding: "5px 10px",
             borderRadius: "5px",
-            backgroundColor: "#007bff",
+            backgroundColor: "#E0474C",
             color: "#fff",
             border: "none",
             cursor: "default",
@@ -48,7 +49,7 @@ const styles = {
       margin: "10px 0px",
       padding: "5px 10px",
       borderRadius: "5px",
-      backgroundColor: "#007bff",
+      backgroundColor: "#E0474C",
       color: "#fff",
       border: "none",
       cursor: "pointer",

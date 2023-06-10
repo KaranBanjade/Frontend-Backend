@@ -1,13 +1,24 @@
-// component with text which tells how to use the app
+import React from "react";
 
 const WelcomeComponent = () => {
-    return (
-        <>
-        <h1 style={{ textAlign: "center" }}>Welcome to the MERN Stack Generator</h1>
-        <p style={{ textAlign: "center" }}>This app will help you generate a MERN stack project with a few clicks of a button.</p>
-        <p style={{ textAlign: "center" }}>To get started, click the "Next" button below.</p>
-        </>
-    );
-    };
+  return (
+    <div>
+    <div style={containerStyle}>
+      <h1>Welcome to the MERN Stack Generator</h1>
+      <p>This app will help you generate a MERN stack project with a few clicks of a button.</p>
+      <p>To get started, click the "Next" button below.</p>
+    </div>
+    </div>
+  );
+};
+
+const containerStyle = {
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  justifyContent: "center",
+  textAlign: "center",
+  marginTop: "180px",
+};
 
 export default WelcomeComponent;
