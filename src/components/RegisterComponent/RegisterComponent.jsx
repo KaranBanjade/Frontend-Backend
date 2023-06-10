@@ -6,10 +6,10 @@ const RegisterComponent = ({ setLogin }) => {
   const initialCredentials = {
     username: "dummy User",
     name: "dummy",
-    email: "",
+    email: "karan@mail.com",
     number: "9999999999",
-    password: "123455",
-    confirmPassword: "123455",
+    password: "12345",
+    confirmPassword: "12345",
   };
   const [credentials, setCredentials] = useState(initialCredentials);
 

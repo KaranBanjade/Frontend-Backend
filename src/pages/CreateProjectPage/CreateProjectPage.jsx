@@ -68,7 +68,7 @@ const CreateProjectPage = () => {
   };
 
   const defaultGlobal = () => {
-    setGlobalArray(prev => [...prev, [{ name: "", type: " ", required: false, unique: false, default: ""}]]);
+    setGlobalArray(prev => [...prev, [{ name: "", type: "String", required: false, unique: false, default: ""}]]);
   };
 
   const handleNext = () => {
@@ -94,6 +94,12 @@ const CreateProjectPage = () => {
     setCounter(prev => prev - 1);
   };
   const handleSubmit = () => {
+    const check = globalArray.every(model => model.every(field => field.name !== ""));
+    if (!check) {
+      alert("Please fill all fields");
+      return;
+    }
+
     setSubmit(prev => !prev);
     if (submit) {
       const data = []
@@ -114,16 +120,16 @@ const CreateProjectPage = () => {
       })
       console.log(data);
 
+      const user = localStorage.getItem("user");
+      const userId = JSON.parse(user).id;
       setApiObject({
-        userId: "64821ee0e02bb85a07ab27d9",
+        userId: userId,
           connObj: databaseSettings,
           models: data,
       });
       alert("Downloading...");
       DownloadProject(apiObject);
-    } else {
-      alert("Not Submit");
-    }
+    } 
   };
 
   const returnForms = () => {

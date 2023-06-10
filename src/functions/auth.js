@@ -26,9 +26,9 @@ const LoginFunction = (credential, password) => {
         .then(response => response.json())
         .then(result => {
             console.log(result);
-            if (result.status === 200) {
+            if (result.message === "logged in successfully") {
                 localStorage.setItem('token', result.token);
-                localStorage.setItem('user', JSON.stringify(result.user));
+                localStorage.setItem('user', JSON.stringify(result.data));
                 window.location.href = '/dashboard';
             } else {
                 alert(result.message);
