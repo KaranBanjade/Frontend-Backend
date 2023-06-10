@@ -181,18 +181,18 @@ const CreateProjectPage = () => {
 
   return (
     <div className="create-content">
-      <SidebarComponent className="sidebar" setCounter={setCounter} models={models} />
-      <div id="forms-collection" style={{
-        marginLeft: "100px"
-      }}>
-  
+      {counter>0&&<SidebarComponent className="sidebar" setCounter={setCounter} models={models} />}
+      <div id="forms-collection">
+
         {!submit ? (
           returnForms()
         ) : (
           <SubmitComponent projectSettings={projectSettings} databaseSettings={databaseSettings} globalArray={globalArray} models = {models}/>
         )}
         <div className="buttonsFooter" style={styles.buttonsFooter}>
-          {submit || <button style={styles.button} onClick={handleNext}>Next</button>}
+          {submit || <button style={styles.button} onClick={handleNext}>
+            {counter>0?"Next":"Start"}
+            </button>}
           {counter > 0 && <button style={styles.button} onClick={handleBack}>Back</button>}
           {counter >= 2 && (
             <button style={styles.button} onClick={handleSubmit}>{submit ? "Download" : "Overview"}</button>
