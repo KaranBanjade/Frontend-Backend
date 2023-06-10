@@ -25,16 +25,17 @@ const DownloadProject = (data) =>{
 // }
 const DownloadLastProject = (e) =>{
   e.preventDefault();
-  alert("Download Last Project")
-  return;
-  const api = "http://localhost:3001/project/last";
-  const useId = localStorage.getItem('user');
+  // alert("Download Last Project")
+  // return;
+  const api = "http://localhost:5000/getLastUserBackend";
+  const user = localStorage.getItem('user');
+  const userId = JSON.parse(user).id;
   const data = {
-    userId: useId
+    userId: userId
   }
 
   fetch(api, {
-    method: "GET",
+    method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
@@ -45,7 +46,40 @@ const DownloadLastProject = (e) =>{
     })
     .then((data) => {
         console.log(data);
-        DownloadProject(data);
+        // model data back to the format of the frontend
+      //   {
+      //     "userId": "6484acf326591053ee351e1a",
+      //     "backendObject": {
+      //         "connObj": {
+      //             "dbname": "database",
+      //             "dbtype": "MySQL",
+      //             "dbhost": "localhost",
+      //             "dbport": "3306",
+      //             "dbusername": "admin",
+      //             "dbpassword": ""
+      //         },
+      //         "models": [
+      //             {
+      //                 "name": "model",
+      //                 "fieldsObject": {
+      //                     "field": {
+      //                         "type": "String",
+      //                         "allowNull": false,
+      //                         "defaultValue": ""
+      //                     }
+      //                 }
+      //             }
+      //         ]
+      //     },
+      //     "timestamp": "2023-06-10T18:37:16.122Z",
+      //     "id": "6484c2dc9ba726a8ccdb5e6d"
+      // }
+        const modelData = {
+          userId: data.userId,
+          connObj: data.backendObject.connObj,
+          models: data.backendObject.models
+        }
+        DownloadProject(modelData);
     });
 }
 const DownloadFunctions = {

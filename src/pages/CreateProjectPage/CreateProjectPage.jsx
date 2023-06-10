@@ -129,6 +129,8 @@ const CreateProjectPage = () => {
       });
       alert("Downloading...");
       DownloadProject(apiObject);
+      // go to dashboard
+      window.location.href = "/dashboard";
     } 
   };
 
