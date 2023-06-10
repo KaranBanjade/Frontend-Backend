@@ -67,8 +67,17 @@ const CreateProjectPage = () => {
 // }
   const [counter, setCounter] = useState(0);
   const [globalArray, setGlobalArray] = useState([]);
-  const [projectSettings, setProjectSettings] = useState({});
-  const [databaseSettings, setDatabaseSettings] = useState({});
+  const [projectSettings, setProjectSettings] = useState({
+    "name": "Project"
+  });
+  const [databaseSettings, setDatabaseSettings] = useState({
+    "dbname": "database",
+    "dbtype": "MySQL",
+    "dbhost": "localhost",
+    "dbport": "3306",
+    "dbusername": "admin",
+    "dbpassword": "",
+});
   const [submit, setSubmit] = useState(false);
   const [models, setModels] = useState([]);
   const [apiObject, setApiObject] = useState({});

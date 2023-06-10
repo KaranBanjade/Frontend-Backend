@@ -20,6 +20,7 @@ const DatabaseFormComponent = ({ databaseSettings, setDatabaseSettings }) => {
       ...prev,
       [name]: value,
     }));
+    console.log(databaseSettings)
   };
 
   return (
@@ -54,9 +55,8 @@ const DatabaseFormComponent = ({ databaseSettings, setDatabaseSettings }) => {
               <td>
                 <select
                   name="dbtype"
-                  value={inputValues.dbtype||"MySQL"}
+                  value={inputValues.dbtype || "MySQL"}
                   onChange={fieldOnChangeHandler}
-                  defaultChecked="MySQL"
                   style={{
                     width: "100%",
                     padding: "10px",
@@ -64,9 +64,10 @@ const DatabaseFormComponent = ({ databaseSettings, setDatabaseSettings }) => {
                     border: "1px solid #cccccc",
                   }}
                 >
-                  <option value="PostgreSQL" defaultChecked>PostgreSQL</option>
+                  <option value="PostgreSQL">PostgreSQL</option>
                   <option value="MySQL">MySQL</option>
                 </select>
+
               </td>
             </tr>
             <tr>
@@ -96,8 +97,7 @@ const DatabaseFormComponent = ({ databaseSettings, setDatabaseSettings }) => {
                 <input
                   type="number"
                   name="dbport"
-                  defaultValue={inputValues.dbport || "3306"}
-                  value={inputValues.dbport}
+                  value={inputValues.dbport || "3306"}
                   onChange={fieldOnChangeHandler}
                   style={{
                     width: "100%",
@@ -106,6 +106,7 @@ const DatabaseFormComponent = ({ databaseSettings, setDatabaseSettings }) => {
                     border: "1px solid #cccccc",
                   }}
                 />
+
               </td>
             </tr>
             <tr>
