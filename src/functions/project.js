@@ -1,89 +1,94 @@
-const DownloadProject = (data) =>{
-    // const api = "https://scriptsorcerers-backend.adaptable.app/test ";
-    const api = "http://localhost:5000/addNewBackend";
-  fetch(api, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(data),
-  })
-    .then(res => res.blob())
-    .then(blob => {
-      const url = window.URL.createObjectURL(blob);
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = "download.zip";
-      document.body.appendChild(a);
-      a.click();
-      a.remove();
-    }
-    );
-}
-// const DownloadFunctions = {
-//   DownloadProject
-// }
-const DownloadLastProject = (e) =>{
+const DownloadProject = async (data) => {
+  console.log("download function data\n", data);
+  const api = "http://localhost:5000/addNewBackend";
+  try {
+    const response = await fetch(api, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+    // the response will be either blob or json
+    // if blob then we will download the file
+    // if json then we will show the error
+    const jsonData = await response.json();
+    console.log(jsonData);
+    const blob = await response.blob();
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "download.zip";
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    return true;
+  } catch (error) {
+    console.log(error);
+    return false;
+  }
+};
+
+const DownloadLastProject = async (e) => {
   e.preventDefault();
-  // alert("Download Last Project")
-  // return;
   const api = "http://localhost:5000/getLastUserBackend";
   const user = localStorage.getItem('user');
   const userId = JSON.parse(user).id;
   const data = {
     userId: userId
-  }
+  };
 
-  fetch(api, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(data),
-  })
-    .then((res) => {
-      return res.json();
-    })
-    .then((data) => {
-        console.log(data);
-        // model data back to the format of the frontend
-      //   {
-      //     "userId": "6484acf326591053ee351e1a",
-      //     "backendObject": {
-      //         "connObj": {
-      //             "dbname": "database",
-      //             "dbtype": "MySQL",
-      //             "dbhost": "localhost",
-      //             "dbport": "3306",
-      //             "dbusername": "admin",
-      //             "dbpassword": ""
-      //         },
-      //         "models": [
-      //             {
-      //                 "name": "model",
-      //                 "fieldsObject": {
-      //                     "field": {
-      //                         "type": "String",
-      //                         "allowNull": false,
-      //                         "defaultValue": ""
-      //                     }
-      //                 }
-      //             }
-      //         ]
-      //     },
-      //     "timestamp": "2023-06-10T18:37:16.122Z",
-      //     "id": "6484c2dc9ba726a8ccdb5e6d"
-      // }
-        const modelData = {
-          userId: data.userId,
-          connObj: data.backendObject.connObj,
-          models: data.backendObject.models
-        }
-        DownloadProject(modelData);
+  try {
+    const response = await fetch(api, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
     });
-}
+    const jsonData = await response.json();
+    // console.log(jsonData);
+    const modelData = {
+      userId: jsonData.userId,
+      connObj: jsonData.backendObject.connObj,
+      models: jsonData.backendObject.models
+    };
+    console.log("Model Data",modelData)
+    await DownloadProject(modelData);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const GetAllUserProjects = async (setComponents) => {
+  const api = "http://localhost:5000/getAllUserBackends";
+  const user = localStorage.getItem('user');
+  const userId = JSON.parse(user).id;
+  const data = {
+    userId: userId
+  };
+
+  try {
+    const response = await fetch(api, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+    const jsonData = await response.json();
+    setComponents(jsonData);
+    return jsonData;
+  } catch (error) {
+    console.log(error);
+    return [];
+  }
+};
+
 const DownloadFunctions = {
   DownloadProject,
-  DownloadLastProject
-}
+  DownloadLastProject,
+  GetAllUserProjects
+};
+
 export default DownloadFunctions;

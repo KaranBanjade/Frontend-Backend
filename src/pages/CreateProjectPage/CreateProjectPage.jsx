@@ -44,12 +44,19 @@ const CreateProjectPage = () => {
   const [apiObject, setApiObject] = useState({});
   const location = useLocation();
   const buildStatesFromData = (data) => {
+    console.log("Data\n",data);
     setDatabaseSettings(data.connObj);
     setModels(data.models.map(model => model.name));
     setGlobalArray(data.models.map(model => Object.entries(model.fieldsObject).map(field => ({name: field[0], type: field[1].type, required: field[1].allowNull==="false", unique: field[1].primaryKey==="true", default: field[1].defaultValue}))));
   };
+
+  // useEffect(() => {
+  //   console.log("\nGB\n",globalArray, "\nM\n", models,"\nDB\n", databaseSettings);
+  // }, [globalArray, models, databaseSettings]);
+
   useEffect(() => {
     const prevData = location?.state?.prevData;
+    // console.log(location.state.prevData);
     if(prevData){
       buildStatesFromData(prevData);
     }
@@ -94,6 +101,7 @@ const CreateProjectPage = () => {
     setCounter(prev => prev - 1);
   };
   const handleSubmit = () => {
+    // console.log(globalArray);
     const check = globalArray.every(model => model.every(field => field.name !== ""));
     if (!check) {
       alert("Please fill all fields");
@@ -101,6 +109,7 @@ const CreateProjectPage = () => {
     }
 
     setSubmit(prev => !prev);
+    console.log("GB", globalArray, "M", models, "DB", databaseSettings);
     if (submit) {
       const data = []
       globalArray.forEach((model, index) => {
@@ -122,15 +131,121 @@ const CreateProjectPage = () => {
 
       const user = localStorage.getItem("user");
       const userId = JSON.parse(user).id;
+      // setApiObject({
+      //   userId: userId,
+      //     connObj: databaseSettings,
+      //     models: data,
+      // });
       setApiObject({
-        userId: userId,
-          connObj: databaseSettings,
-          models: data,
-      });
+        "userId": "6484acf326591053ee351e1a",
+        "connObj": {
+          "name": "hackaminer",
+          "user": "facproadmin",
+          "pass": "#facproRDS2022#",
+          "host": "database-1.czb0dk8ckwzf.us"
+        },
+        "models": [
+          {
+            "name": "Hospital",
+            "fieldsObject": {
+              "id": {
+                "type": "UUID",
+                "allowNull": "false",
+                "primaryKey": "true",
+                "defaultValue": "UUIDV4"
+              },
+              "name": {
+                "type": "STRING",
+                "allowNull": "false",
+                "primaryKey": "false",
+                "defaultValue": ""
+              },
+              "latitude": {
+                "type": "DOUBLE",
+                "allowNull": "false",
+                "primaryKey": "false",
+                "defaultValue": ""
+              },
+              "longitude": {
+                "type": "DOUBLE",
+                "allowNull": "false",
+                "primaryKey": "false",
+                "defaultValue": ""
+              },
+              "city": {
+                "type": "STRING",
+                "allowNull": "false",
+                "primaryKey": "false",
+                "defaultValue": ""
+              },
+              "zipCode": {
+                "type": "STRING",
+                "allowNull": "false",
+                "primaryKey": "false",
+                "defaultValue": ""
+              },
+              "region": {
+                "type": "STRING",
+                "allowNull": "false",
+                "primaryKey": "false",
+                "defaultValue": ""
+              },
+              "country": {
+                "type": "STRING",
+                "allowNull": "false",
+                "primaryKey": "false",
+                "defaultValue": ""
+              },
+              "address": {
+                "type": "STRING",
+                "allowNull": "false",
+                "primaryKey": "false",
+                "defaultValue": ""
+              },
+              "landmark": {
+                "type": "STRING",
+                "allowNull": "false",
+                "primaryKey": "false",
+                "defaultValue": ""
+              },
+              "url": {
+                "type": "STRING",
+                "allowNull": "false",
+                "primaryKey": "false",
+                "defaultValue": ""
+              },
+              "NumberOfDoctors": {
+                "type": "INTEGER",
+                "allowNull": "false",
+                "primaryKey": "false",
+                "defaultValue": ""
+              },
+              "NumberOfICU": {
+                "type": "INTEGER",
+                "allowNull": "false",
+                "primaryKey": "false",
+                "defaultValue": ""
+              },
+              "totalRooms": {
+                "type": "INTEGER",
+                "allowNull": "false",
+                "primaryKey": "false",
+                "defaultValue": ""
+              }
+            }
+          }
+        ]
+      })
       alert("Downloading...");
-      DownloadProject(apiObject);
+      const res = DownloadProject(apiObject);
+      if(res){
+        alert("Downloaded Successfully");
+      }
+      else{
+        alert("Error in Downloading");
+      }
       // go to dashboard
-      window.location.href = "/dashboard";
+      // window.location.href = "/dashboard";
     } 
   };
 
