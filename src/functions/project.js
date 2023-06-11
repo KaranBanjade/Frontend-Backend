@@ -9,11 +9,6 @@ const DownloadProject = async (data) => {
       },
       body: JSON.stringify(data),
     });
-    // the response will be either blob or json
-    // if blob then we will download the file
-    // if json then we will show the error
-    const jsonData = await response.json();
-    console.log(jsonData);
     const blob = await response.blob();
     const url = window.URL.createObjectURL(blob);
     const a = document.createElement("a");

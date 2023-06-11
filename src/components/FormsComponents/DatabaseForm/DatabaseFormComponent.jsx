@@ -4,13 +4,13 @@ const DatabaseFormComponent = ({ databaseSettings, setDatabaseSettings }) => {
   const [inputValues, setInputValues] = useState(databaseSettings);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
+    // const timer = setTimeout(() => {
       setDatabaseSettings(inputValues);
-    }, 500);
+    // }, 500);
 
-    return () => {
-      clearTimeout(timer);
-    };
+    // return () => {
+    //   clearTimeout(timer);
+    // };
   }, [inputValues, setDatabaseSettings]);
 
   const fieldOnChangeHandler = (e) => {

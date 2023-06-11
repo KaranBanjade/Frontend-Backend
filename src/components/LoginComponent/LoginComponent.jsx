@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import AuthFunction from "../../functions/auth";
-import { set } from "lodash";
 const LoginComponent = ({setLogin}) => {
   const [credential, setCredential] = useState("");
   const [password, setPassword] = useState("");
