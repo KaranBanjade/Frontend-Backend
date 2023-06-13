@@ -32,6 +32,7 @@ const CreateProjectPage = () => {
     setGlobalArray(data.models.map(model => Object.entries(model.fieldsObject).map(field => ({ name: field[0], type: field[1].type, required: field[1].allowNull === "false", unique: field[1].primaryKey === "true", default: field[1].defaultValue }))));
   };
   const DownloadProject = (data) => {
+    console.log(databaseSettings)
     const api = "http://localhost:5000/addNewBackend"
     fetch(api, {
       method: "POST",
@@ -104,18 +105,10 @@ const CreateProjectPage = () => {
       connObj: databaseSettings,
       models: data,
     });
-    setDatabaseSettings(prev => {
-      return {
-        ...prev,
-        dbname: projectSettings.name.toLowerCase(),
-        dbtype: prev.dbtype.toLowerCase(),
-        dbhost: prev.dbhost.toLowerCase(),
-        dbport: prev.dbport.toLowerCase(),
-        dbusername: prev.dbusername.toLowerCase(),
-        dbpassword: prev.dbpassword.toLowerCase(),
-      };
-    });
-  }, [models,globalArray])
+  }, [models,globalArray,databaseSettings])
+  useEffect(() => {
+    console.log(databaseSettings);
+  },[counter])
   const filterGlobal = (index, fields) => {
     setGlobalArray(prev => {
       return prev.map((value, key) => (key === index ? fields : value));

@@ -1,17 +1,20 @@
 import React, { useState, useEffect } from "react";
 
 const DatabaseFormComponent = ({ databaseSettings, setDatabaseSettings }) => {
-  const [inputValues, setInputValues] = useState(databaseSettings);
-  
+  const [inputValues, setInputValues] = useState({});
   useEffect(() => {
-    // const timer = setTimeout(() => {
-      setDatabaseSettings(inputValues);
-    // }, 500);
+    setInputValues(databaseSettings);
+  }, []);
+  // useEffect(() => {
+  //   // const timer = setTimeout(() => {
+  //     setDatabaseSettings(inputValues);
+  //   // }, 500);
 
-    // return () => {
-    //   clearTimeout(timer);
-    // };
-  }, [inputValues, setDatabaseSettings]);
+  //   // return () => {
+  //   //   clearTimeout(timer);
+  //   // };
+  // }, [inputValues, setDatabaseSettings]);
+
 
   const fieldOnChangeHandler = (e) => {
     e.preventDefault();
@@ -20,7 +23,9 @@ const DatabaseFormComponent = ({ databaseSettings, setDatabaseSettings }) => {
       ...prev,
       [name]: value,
     }));
-    console.log(databaseSettings)
+    setDatabaseSettings(inputValues);
+    console.log("datanase Settings\n",databaseSettings);
+    console.log("inputValues\n",inputValues);
   };
 
   return (
@@ -64,7 +69,7 @@ const DatabaseFormComponent = ({ databaseSettings, setDatabaseSettings }) => {
                     border: "1px solid #cccccc",
                   }}
                 >
-                  <option value="PostgreSQL">PostgreSQL</option>
+                  {/* <option value="PostgreSQL">PostgreSQL</option> */}
                   <option value="MySQL">MySQL</option>
                 </select>
 
@@ -144,6 +149,7 @@ const DatabaseFormComponent = ({ databaseSettings, setDatabaseSettings }) => {
                     borderRadius: "3px",
                     border: "1px solid #cccccc",
                   }}
+                  placeholder="Not Suggested"
                 />
               </td>
             </tr>
