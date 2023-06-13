@@ -1,32 +1,56 @@
 import React from "react";
 import DownloadFunctions from "../../functions/project";
-const BackendComponent = ({changeState, comp}) => {
-  
+import { toast } from "react-toastify";
+
+const BackendComponent = ({ changeState, comp }) => {
+  const handleDownloadLastProject = async (e) => {
+    e.preventDefault();
+    try {
+      toast.promise(
+        DownloadFunctions.DownloadLastProject(e),
+        {
+          pending: "Downloading...",
+          success: "Downloaded Successfully",
+          error: "Failed to Download",
+        }
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div style={containerStyle}>
       <div style={dashboardStyle}>
         <span>
-        <h1 style={{ marginBottom: "40px", textAlign: "center" }}>Dashboard</h1>
-        <button onClick={changeState} style={{
-            width: "100%",
-            padding: "20px",
-            marginBottom: "20px",
-            borderRadius: "5px",
-            backgroundColor: "#E0474C",
-            color: "#ffffff",
-            border: "none",
-            cursor: "pointer",
-            fontSize: "18px",
-            fontWeight: "bold",
-            textAlign: "center",
-            textTransform: "uppercase",
-            textDecoration: "none",
-        }}>{comp}</button>
+          <h1 style={{ marginBottom: "40px", textAlign: "center" }}>
+            Dashboard
+          </h1>
+          <button
+            onClick={changeState}
+            style={{
+              width: "100%",
+              padding: "20px",
+              marginBottom: "20px",
+              borderRadius: "5px",
+              backgroundColor: "#E0474C",
+              color: "#ffffff",
+              border: "none",
+              cursor: "pointer",
+              fontSize: "18px",
+              fontWeight: "bold",
+              textAlign: "center",
+              textTransform: "uppercase",
+              textDecoration: "none",
+            }}
+          >
+            {comp}
+          </button>
         </span>
         <a href="/addnewbackend" style={buttonStyle}>
           Create New
         </a>
-        <a style={buttonStyle} onClick={(e)=>{DownloadFunctions.DownloadLastProject(e)}}>
+        <a style={buttonStyle} onClick={handleDownloadLastProject}>
           Download Last
         </a>
         <a href="/viewallprojects" style={buttonStyle}>

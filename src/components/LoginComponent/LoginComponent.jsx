@@ -1,19 +1,37 @@
 import React, { useState } from "react";
 import AuthFunction from "../../functions/auth";
-const LoginComponent = ({setLogin}) => {
+import { toast } from 'react-toastify';
+import { useNavigate } from "react-router";
+const LoginComponent = ({ setLogin }) => {
   const [credential, setCredential] = useState("");
   const [password, setPassword] = useState("");
-
-  const handleLogin = (e) => {
+  const Navigate = useNavigate();
+  const handleLogin = async (e) => {
     e.preventDefault();
-    AuthFunction.LoginFunction(credential, password);
+    try {
+      const resp = await AuthFunction.LoginFunction(credential, password);
+      console.log(resp)
+      if (resp.status === 200) {
+        toast.success('Login Successful');
+        Navigate("/dashboard", { replace: true });
+      }
+      else {
+        alert(resp.message);
+        toast.error(resp.message);
+      }
+    }
+    catch (error) {
+      console.log(error);
+      toast.error(error.message);
+    }
+
   };
 
   const handleChange = (e) => {
     e.preventDefault();
     setLogin(false);
   }
-  
+
   return (
     <div
       style={{
@@ -98,13 +116,13 @@ const LoginComponent = ({setLogin}) => {
           Login
         </button>
         <a href="/" style={{
-            paddingTop: "20px",
-            border: "none",
-            cursor: "pointer",
-            textDecoration: "none",
-            color: "#007bff",
-            
-        }} onClick={(e)=>handleChange(e)}>Register</a>
+          paddingTop: "20px",
+          border: "none",
+          cursor: "pointer",
+          textDecoration: "none",
+          color: "#007bff",
+
+        }} onClick={(e) => handleChange(e)}>Register</a>
       </form>
     </div>
   );

@@ -27,10 +27,10 @@ const DownloadProject = async (data) => {
 const DownloadLastProject = async (e) => {
   e.preventDefault();
   const api = "http://localhost:5000/getLastUserBackend";
-  const user = localStorage.getItem('user');
+  const user = localStorage.getItem("user");
   const userId = JSON.parse(user).id;
   const data = {
-    userId: userId
+    userId: userId,
   };
 
   try {
@@ -42,18 +42,18 @@ const DownloadLastProject = async (e) => {
       body: JSON.stringify(data),
     });
     const jsonData = await response.json();
-    // console.log(jsonData);
     const modelData = {
       userId: jsonData.userId,
       connObj: jsonData.backendObject.connObj,
-      models: jsonData.backendObject.models
+      models: jsonData.backendObject.models,
     };
-    console.log("Model Data",modelData)
-    await DownloadProject(modelData);
+    return DownloadProject(modelData);
   } catch (error) {
     console.log(error);
+    throw new Error("Failed to download last project");
   }
 };
+
 
 const GetAllUserProjects = async (setComponents) => {
   const api = "http://localhost:5000/getAllUserBackends";

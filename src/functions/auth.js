@@ -1,11 +1,12 @@
+import { json } from "react-router";
+
 // import process env
 const api = process.env.REACT_APP_API_URL||'http://localhost:5000';
 const LoginFunction = (credential, password) => {
-    // dummy
+    return new Promise((resolve, reject) => {
     if(credential === 'admin' && password === 'admin'){
         window.location.href = '/dashboard';
     }
-
     if(!credential || !password){
         alert('Please fill all fields');
         return false;
@@ -29,24 +30,45 @@ const LoginFunction = (credential, password) => {
             if (result.message === "logged in successfully") {
                 localStorage.setItem('token', result.token);
                 localStorage.setItem('user', JSON.stringify(result.data));
-                window.location.href = '/dashboard';
+                
+                resolve({
+                    status: 200,
+                    message: result.message
+                })
             } else {
-                alert(result.message);
+                reject({
+                    status: 400,
+                    message: result.message
+                })
             }
         })
-        .catch(error => console.log('error', error));
+        .catch((error) => {
+            console.log('error', error)
+            reject({
+                status: 500,
+                message: error.message
+            })
+
+        });
+    })
 };
 const SignupFunction = (credential) => {
+    return new Promise((resolve, reject) => {
     const { username, email,name, number, password, password2 } = credential;
     console.log(username, email,name, number, password, password2 )
     // dummy
     if(username === 'admin' && password === 'admin'){
         window.location.href = '/dashboard';
-        return true;
+         return resolve({
+            status: 200,
+            message: 'logged in successfully'
+         });
     }
     if(!username || !email || !name || !number ||!password){
-        alert('Please fill fields');
-        return false;
+        return reject({
+            status: 400,
+            message: 'Please fill all fields'
+        });
     }
     // if(password !== password2){
     //     alert('Password not match');
@@ -68,18 +90,45 @@ const SignupFunction = (credential) => {
             if (result.status === 200) {
                 localStorage.setItem('token', result.token);
                 localStorage.setItem('user', JSON.stringify(result.user));
-                window.location.href = '/dashboard';
+                resolve({
+                    status: 200,
+                    message: result.message
+                });
             } else {
-                alert(result.message);
+                reject({
+                    status: 400,
+                    message: result.message
+                });
             }
         }
         )
-        .catch(error => console.log('error', error));
+        .catch((error) => {
+            console.log('error', error)
+            reject({
+                status: 500,
+                message: error.message
+            })
+
+        });
+    })
 };
 const LogoutFunction = () => {
-    localStorage.removeItem('token');
-    localStorage.removeItem('user');
-    window.location.href = '/';
+    return new Promise((resolve, reject) => {
+        try{
+            localStorage.removeItem('token');
+            localStorage.removeItem('user');
+            resolve({
+                status: 200,
+                message: 'logged out successfully'
+            });
+        }
+        catch(error){
+            reject({
+                status: 500,
+                message: error.message
+            });
+        }
+    })
 }
 
 const AuthFunction = {

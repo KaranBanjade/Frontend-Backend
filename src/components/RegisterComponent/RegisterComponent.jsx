@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import AuthFunction from "../../functions/auth";
-
-
+import {toast} from "react-toastify";
+import { useNavigate } from "react-router";
 const RegisterComponent = ({ setLogin }) => {
+  const Navigate = useNavigate();
   const initialCredentials = {
     username: "dummy User",
     name: "dummy",
@@ -13,9 +14,19 @@ const RegisterComponent = ({ setLogin }) => {
   };
   const [credentials, setCredentials] = useState(initialCredentials);
 
-  const handleRegister = (e) => {
+  const handleRegister = async(e) => {
     e.preventDefault();
-    AuthFunction.SignupFunction(credentials);    
+    const resp = AuthFunction.SignupFunction(credentials);    
+    if(resp.status === 200){
+      toast.success("Registered Successfully");
+      setLogin(true);
+      Navigate("/dashboard", { replace: true });
+    }
+    else{
+      toast.error(resp.message);
+    }
+    
+
   };
 
   const handleLogin = (e) => {

@@ -1,7 +1,28 @@
 import React from "react";
-import { useNavigate } from "react-router";
+import { Navigate, useNavigate } from "react-router";
+import AuthFunction from "../../functions/auth";
+import { toast } from "react-toastify";
 const ProfileComponent = ({changeState, comp}) => {
-  const navigate = useNavigate();
+  const handleLogout = async (e) => {
+    e.preventDefault();
+    try {
+      const resp = await AuthFunction.LogoutFunction();
+      console.log(resp);
+      if (resp.status === 200) {
+        toast.success("Logout Successful");
+        setTimeout(() => {
+          Navigate("/login", { replace: true });
+        }, 1000);
+        
+      } else {
+        alert(resp.message);
+        toast.error(resp.message);
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error(error.message);
+    }
+  }
   return (
     <div style={containerStyle}>
       <div style={dashboardStyle}>
@@ -29,10 +50,7 @@ const ProfileComponent = ({changeState, comp}) => {
         <a href="/" style={buttonStyle} onClick={
           (e)=>{
             e.preventDefault();
-            localStorage.removeItem("token");
-            localStorage.removeItem("user");
-            localStorage.removeItem("userId");
-            navigate('/login', { replace: true });
+            handleLogout();
           }
         }>
           Logout
