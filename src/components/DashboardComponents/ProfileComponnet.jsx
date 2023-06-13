@@ -23,7 +23,7 @@ const ProfileComponent = ({changeState, comp}) => {
             textDecoration: "none",
         }}>{comp}</button>
         </span>
-        <a href="/addnewbackend" style={buttonStyle}>
+        <a href="/profile" style={buttonStyle}>
           Profile
         </a>
         <a href="/" style={buttonStyle} onClick={
