@@ -325,13 +325,22 @@ const ViewAllComponentsList = () => {
       }
     ]
     const [components, setComponents] = useState([]);
+    const [user, setUser ] = useState({});
     useEffect(() => {
       DownloadFunctions.GetAllUserProjects(setComponents);
+      setUser(JSON.parse(localStorage.getItem("user")));
     },[])
     useEffect(() => {}, [components]);
     return (
         <div>
-        <h1>ViewAllComponentsList</h1>
+        <h1
+            style={{
+            textAlign: "center",
+            color: "#3f51b5",
+            marginTop: "2rem",
+            }}
+            
+        >{user.username}'s Past Projects</h1>
         <div style={{
             display: "flex",
             flexWrap: "wrap",

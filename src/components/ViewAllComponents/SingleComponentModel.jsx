@@ -27,8 +27,8 @@ const SingleComponentModel = ({component}) => {
         }} onClick={(e)=>{
             editCurrentModel(obj, navigate);
         }}>
-            <h1>{connObj.dbname||"component Name"}</h1>
-            <h2>{connObj.dbhost||"component Description"}</h2>
+            <h1>{connObj.dbname||"Project Name"}</h1>
+            <h2>{connObj.dbhost||"Project Description"}</h2>
             <ul>
                 {models.map(model => <li>{model.name}</li>)||"Models"}
             </ul>
