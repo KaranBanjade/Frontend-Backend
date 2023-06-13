@@ -341,6 +341,14 @@ const ViewAllComponentsList = () => {
             }}
             
         >{user.username}'s Past Projects</h1>
+        {
+        components.length===0?
+        <h1 style={{
+          color: "#3f51b5",
+          textAlign: "center",
+          marginTop: "2rem",
+          
+        }}>No Past Projects</h1>:
         <div style={{
             display: "flex",
             flexWrap: "wrap",
@@ -349,10 +357,14 @@ const ViewAllComponentsList = () => {
             height: "100vh",
             backgroundColor: "#f5f5f5",
         }}>
-            {components&&components.map((component) => (
-                <SingleComponentModel component={component}/>
-            ))}
+            {
+                
+                components.map((component) => (
+                  <SingleComponentModel component={component}/>
+              ))
+            }
         </div>
+      }
         </div>
     );
 }

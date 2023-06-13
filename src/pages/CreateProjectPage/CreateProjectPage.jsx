@@ -104,6 +104,17 @@ const CreateProjectPage = () => {
       connObj: databaseSettings,
       models: data,
     });
+    setDatabaseSettings(prev => {
+      return {
+        ...prev,
+        dbname: projectSettings.name.toLowerCase(),
+        dbtype: prev.dbtype.toLowerCase(),
+        dbhost: prev.dbhost.toLowerCase(),
+        dbport: prev.dbport.toLowerCase(),
+        dbusername: prev.dbusername.toLowerCase(),
+        dbpassword: prev.dbpassword.toLowerCase(),
+      };
+    });
   }, [models,globalArray])
   const filterGlobal = (index, fields) => {
     setGlobalArray(prev => {

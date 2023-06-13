@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 
 const DatabaseFormComponent = ({ databaseSettings, setDatabaseSettings }) => {
   const [inputValues, setInputValues] = useState(databaseSettings);
-
+  
   useEffect(() => {
     // const timer = setTimeout(() => {
       setDatabaseSettings(inputValues);
