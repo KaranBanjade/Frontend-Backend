@@ -1,99 +1,98 @@
-import React from "react";
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import './LandingPage.css';
 
 const LandingPage = () => {
-  const landingPageStyle = {
-    textAlign: "center",
-    padding: "20px",
-  };
+  const navigate = useNavigate();
+  const scrollToBottom = () => {
+    // if it is down scroll to top
+    if (window.scrollY > 0) {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      // change the text to up
+      document.getElementsByClassName('scroll-to-bottom')[0].innerHTML = '👇';
 
-  const sectionStyle = {
-    marginBottom: "50px",
-  };
-
-  const sectionContentStyle = {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "center",
-  };
-
-  const sectionTextStyle = {
-    maxWidth: "600px",
-    margin: "0 auto",
-  };
-
-  const profileImageStyle = {
-    width: "200px",
-    height: "200px",
-    borderRadius: "50%",
-    marginBottom: "20px",
-  };
-
-  const projectImageStyle = {
-    width: "300px",
-    height: "200px",
-    marginLeft: "20px",
-    objectFit: "cover",
-  };
-
-  const ctaButtonStyle = {
-    padding: "10px 20px",
-    fontSize: "18px",
-    backgroundColor: "lightBlue",
-    borderRadius: "4%",
-    cursor: "pointer",
-    textDecoration: "none",
+    } else {
+      // if it is up scroll to bottom
+      window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+      document.getElementsByClassName('scroll-to-bottom')[0].innerHTML = '👆';
+    }
   };
 
   return (
-    <div style={landingPageStyle}>
-      <h1>Welcome to My Project</h1>
-      <div style={sectionStyle}>
-        <div style={sectionContentStyle}>
-          <img
-            // src={profileImage}
-            alt="Profile"
-            style={profileImageStyle}
-          />
-          <div style={sectionTextStyle}>
-            <h2>About Me</h2>
-            <p>
-              Hello! My name is [Your Name]. I'm a passionate developer with a strong focus on backend development. I have extensive experience in creating efficient and scalable solutions.
-            </p>
-            <p>
-              With this project, I aim to simplify backend development by providing a tool that generates boilerplate code for Node.js based on your models and database data.
-            </p>
-            <p>
-              If you have any questions, suggestions, or feedback, feel free to reach out to me at [Your Email Address]. I would be happy to assist you!
-            </p>
-          </div>
-        </div>
+    <div className="landing-page">
+      <div className="top">
+        <h1 className="title" style={{
+          fontSize: '4rem',
+          fontWeight: 'bold',
+          color: '#ff4244',
+          textAlign: 'center',
+          margin: '0 0 1rem 0',
+          border: 'none',
+        }}>Backend Code Generation Tool</h1>
+        <p className="subtitle">Sick of writing the same boilerplate code over and over again?</p>
+        <p>We present to you</p>
+        <h1 className="highlight" style={{
+          fontSize: '3.5rem',
+          fontWeight: 'bold',
+          textAlign: 'center',
+          margin: '0 0 1rem 0',
+          border: 'none',
+        }}>THE BACKEND</h1>
+        <p>One stop for generating the starting template for backends using</p>
+        <h2 className="highlight" style={{
+          fontSize: '2rem',
+          fontWeight: 'bold',
+          textAlign: 'center',
+          margin: '0 0 1rem 0',
+          border: 'none',
+        }}>Node, Express, MySQL</h2>
       </div>
-      <div style={sectionStyle}>
-        <div style={sectionContentStyle}>
-          <div style={sectionTextStyle}>
-            <h2>About the Project</h2>
-            <p>
-              The [Project Name] is a powerful tool that automates the process of setting up the backend structure for your Node.js projects. It saves you time and effort by generating boilerplate code based on the models and database information you provide.
-            </p>
-            <p>
-              Whether you're a beginner or an experienced developer, this tool will help you kickstart your backend development and allow you to focus on building your application's core features.
-            </p>
-            <p>
-              To get started, simply navigate to the [Project Name] page and follow the instructions to input your models and database data. Once you submit the form, the generated backend code will be displayed for you to use in your project.
-            </p>
-          </div>
-          {/* <img src={projectImage} alt="Project" style={projectImageStyle} /> */}
-        </div>
+      <div className="features">
+        <h1 style={{
+          color: 'rgb(0, 123, 255)'
+        }}>Features</h1>
+        <ul>
+          <li>Generate the starting template for your backend</li>
+          <li>Generate the code for your models</li>
+          <li>Generate the code for your controllers</li>
+          <li>Generate the code for your routes</li>
+          <li>Generate the code for your database</li>
+        </ul>
+        <h2 className="highlight">Just NPM start your projects</h2>
       </div>
-      <div style={sectionStyle}>
-        <div style={sectionContentStyle}>
-          <h2>Get Started</h2>
-          <p>
-            Start using [Project Name] today and simplify your backend development process. Experience the benefits of automated code generation and accelerate your project's progress.
-          </p>
-          <a style={ctaButtonStyle} href="/dashboard" >Get Started</a>
-        </div>
+      <div className="usage">
+        <h1 style={{
+          color: 'rgb(0, 123, 255)'
+        }}>How to Use</h1>
+        <p>Just fill in the details and click on generate</p>
+        <p>Copy the code and paste it in your project</p>
+        <p>Run npm install and npm start</p>
+        <p>And you are good to go</p>
+      </div>
+      <button className="generate-button" onClick={(e)=>{
+        e.preventDefault();
+        navigate('/dashboard');
+      }}>Generate</button>
+
+      <div className="scroll-to-bottom" style={{
+        position: 'fixed',
+        bottom: '20px',
+        right: '20px',
+        cursor: 'pointer',
+        fontSize: '24px',
+        color: '#333',
+        backgroundColor: '#fff',
+        borderRadius: '50%',
+        width: '50px',
+        height: '50px',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.2)',
+        transition: 'background-color 0.3s ease',
+        boxShadow: '0px 0px 10px 5px rgb(0, 123, 255)',
+      }} onClick={scrollToBottom}>
+        👇
       </div>
     </div>
   );

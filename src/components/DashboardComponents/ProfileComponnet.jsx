@@ -1,6 +1,7 @@
 import React from "react";
+import { useNavigate } from "react-router";
 const ProfileComponent = ({changeState, comp}) => {
-  
+  const navigate = useNavigate();
   return (
     <div style={containerStyle}>
       <div style={dashboardStyle}>
@@ -25,7 +26,15 @@ const ProfileComponent = ({changeState, comp}) => {
         <a href="/addnewbackend" style={buttonStyle}>
           Profile
         </a>
-        <a href="/addnewbackend" style={buttonStyle}>
+        <a href="/" style={buttonStyle} onClick={
+          (e)=>{
+            e.preventDefault();
+            localStorage.removeItem("token");
+            localStorage.removeItem("user");
+            localStorage.removeItem("userId");
+            navigate('/login', { replace: true });
+          }
+        }>
           Logout
         </a>
         

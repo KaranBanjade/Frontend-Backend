@@ -1,4 +1,3 @@
-// import { BrowserRouter, Route } from 'react-router-dom';
 import './App.css';
 import Pages from './pages';
 import Components from './components';
@@ -9,17 +8,18 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-      <NavbarComponent />
+      {/* if on landing page, dont show navbar */}
+      {
+        window.location.pathname =='/' ? null : <NavbarComponent />
+      }
       <Routes>
       <Route path='/' >
-        <Route index element={<LandingPage />} />
+        <Route index element = {<LandingPage />} />
         <Route path = "login" element={<LoginPage />} />
-        {/* <Route path="profile" element={<SecureRoutes component={<ProfilePage/>} />} /> */}
-        <Route path="profile" element={<ProfilePage/>} />
-        <Route path="dashboard" element={<DashboardPage/>} />
-        {/* <Route path="addnewbackend" element={< SecureRoutes component={<CreateProjectPage/> } />} /> */}
-        <Route path="addnewbackend" element={<CreateProjectPage/>} />
-        <Route path="viewallprojects" element={<ViewAllProjects/>} />
+        <Route path="profile" element={<SecureRoutes component={ProfilePage} /> } />
+        <Route path="dashboard" element={<SecureRoutes component={DashboardPage} /> }  />
+        <Route path="addnewbackend" element={<SecureRoutes component={CreateProjectPage} /> } />
+        <Route path="viewallprojects" element={<SecureRoutes component={ViewAllProjects} /> } />
       </Route>
       </Routes>
       </BrowserRouter>
