@@ -3,11 +3,18 @@ import "./SubmitComponent.css";
 const SubmitComponent = ({ projectSettings, databaseSettings, globalArray,models }) => {
   return (
     <div className="submit-component">
-      <table className="submit-table">
+      <table className="submit-table" style={{
+        backgroundColor: "#f5f5f5",
+        width: "400px",
+        border: "1px solid #ddd",
+      }}>
         <thead>
           <tr>
-            <th colSpan={2}>
-              <h2>Database Settings</h2>
+            <th colSpan={2} style={{
+          backgroundColor: "white",
+
+        }}>
+              <h2 >Database Settings</h2>
             </th>
           </tr>
         </thead>
@@ -38,13 +45,38 @@ const SubmitComponent = ({ projectSettings, databaseSettings, globalArray,models
           </tr>
         </tbody>
       </table>
-
+      <table className="submit-table" style={{
+        backgroundColor: "#f5f5f5",
+        width: "400px",
+        border: "1px solid #ddd",
+      }}>
+        <thead>
+          <tr>
+            <th colSpan={2} style={{
+          backgroundColor: "white",
+            }}>
+              <h2>Models</h2>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
       {globalArray.map((table, index) => (
-        <table key={index} className="submit-table">
+        <tr>
+        <table key={index} className="submit-table" style={{
+          width: "400px",
+          border: "1px solid #ddd",
+        }}>
           <thead>
             <tr>
-              <th colSpan={2}>
-                <h2>{models[index]}</h2>
+              <th style={{
+                width: "200px",
+              }}>
+
+              </th>
+            </tr>
+            <tr >
+              <th colSpan={2} >
+                <h2 >Model Name: {models[index]}</h2>
               </th>
             </tr>
           </thead>
@@ -52,7 +84,10 @@ const SubmitComponent = ({ projectSettings, databaseSettings, globalArray,models
             <tr>
               <td>
             {table.map((field, index) => (
-              <table key={index} >
+              <table key={index} style={{
+                width: "400px",
+                border: "1px solid #ddd",
+              }}>
                 <thead>
                   <tr>
                     <th colSpan={2}>
@@ -82,6 +117,11 @@ const SubmitComponent = ({ projectSettings, databaseSettings, globalArray,models
                       <td><strong>Field Default:</strong></td>
                       <td>{field.default}</td>
                     </tr>
+                    <tr>
+                      <td style={{
+                        width: "200px",
+                      }}></td>
+                    </tr>
                   </React.Fragment>
                 </tbody>
               </table>
@@ -90,7 +130,10 @@ const SubmitComponent = ({ projectSettings, databaseSettings, globalArray,models
             </tr>
           </tbody>
         </table>
+        </tr>
       ))}
+      </tbody>
+      </table>
     </div>
   );
 };

@@ -1,18 +1,19 @@
 import React from 'react';
 
 const TabelFormComponent = (props) => {
-  const { value, index, fields, setFields } = props;
+  const { value, index, fields, setFields, filterGlobal, filterIndex } = props;
 
   const fieldChangeHandler = (e, key) => {
     const { name, type, value, checked } = e.target;
     let data = [...fields];
     data[key][name] = type === 'checkbox' ? checked : value;
     setFields(data);
+    filterGlobal(filterIndex, fields);
   };
 
   const styles = {
     row: {
-      textAlign: 'center',
+      textAlign: 'center'
     },
     input: {
       padding: '0.5rem',
@@ -23,6 +24,7 @@ const TabelFormComponent = (props) => {
     },
     select: {
       padding: '0.5rem',
+      margin: '0.5rem',
       borderRadius: '3px',
       border: '1px solid #ccc',
       width: '100%',
@@ -45,11 +47,35 @@ const TabelFormComponent = (props) => {
         <input name="name" type="text" value={value.name} onChange={(e) => fieldChangeHandler(e, index)} style={styles.input} />
       </td>
       <td>
-        <select name="type" value={value.type || "string"} onChange={(e) => fieldChangeHandler(e, index)} style={styles.select}>
-          <option value="string">String</option>
-          <option value="number">Number</option>
-          <option value="boolean">Boolean</option>
-          <option value="date">Date</option>
+        <select name="type" value={value.type || "STRING"} onChange={(e) => fieldChangeHandler(e, index)} style={{
+          ...styles.input,
+          height: '40px',
+          marginTop: '-20px',
+        }}>
+            <option value="STRING">String</option>
+          <option value="INTEGER">Integer</option>
+          <option value="UUID">UUID</option>
+          <option value="UUIDV4">UUIDv4</option>
+          <option value="ENUM">Enum</option>
+          <option value="BOOLEAN">Boolean</option>
+          <option value="DATE">Date</option>
+          <option value="TEXT">Text</option>
+          <option value="FLOAT">Float</option>
+          <option value="DOUBLE">Double</option>
+          <option value="DECIMAL">Decimal</option>
+          <option value="ARRAY">Array</option>
+          <option value="JSON">JSON</option>
+          <option value="DOUBLE PRECISION">Double Precision</option>
+          <option value="TIME">Time</option>
+          <option value="TINYINT">Tinyint</option>
+          <option value="SMALLINT">Smallint</option>
+          <option value="MEDIUMINT">Mediumint</option>
+          <option value="BIGINT">Bigint</option>
+          <option value="UNSIGNED INTEGER">Unsigned Integer</option>
+          <option value="UNSIGNED BIGINT">Unsigned Bigint</option>
+          <option value="CHAR">Char</option>
+          <option value="DATEONLY">Dateonly</option>
+          <option value="NOW">Now</option>
         </select>
       </td>
       <td>

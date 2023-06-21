@@ -5,16 +5,6 @@ const DatabaseFormComponent = ({ databaseSettings, setDatabaseSettings }) => {
   useEffect(() => {
     setInputValues(databaseSettings);
   }, []);
-  // useEffect(() => {
-  //   // const timer = setTimeout(() => {
-  //     setDatabaseSettings(inputValues);
-  //   // }, 500);
-
-  //   // return () => {
-  //   //   clearTimeout(timer);
-  //   // };
-  // }, [inputValues, setDatabaseSettings]);
-
 
   const fieldOnChangeHandler = (e) => {
     e.preventDefault();

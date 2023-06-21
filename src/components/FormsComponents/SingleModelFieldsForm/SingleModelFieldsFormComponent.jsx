@@ -3,7 +3,7 @@ import TabelFormComponent from "../../TableFormComponent/TableFormComponent";
 
 const SingleModelFieldsFormComponent = ({ globalArray, index, filterGlobal, defaultGlobal, models, setModels, handleDeleteModel }) => {
   const [fields, setFields] = useState([]);
-  const [modelName, setModelName] = useState(""); // New state variable for modelName
+  const [modelName, setModelName] = useState("");
 
   useEffect(() => {
     models[index] ? setModelName(models[index]) : setModelName("");
@@ -14,7 +14,7 @@ const SingleModelFieldsFormComponent = ({ globalArray, index, filterGlobal, defa
       setFields([{ name: "", type: "", required: true, unique: false, default: "" }]);
       defaultGlobal();
     }
-  }, [globalArray, index, defaultGlobal, models]);
+  }, [globalArray, index, models]);
 
   const modelChangeHandler = (e) => {
     setModelName(e.target.value);
@@ -36,6 +36,7 @@ const SingleModelFieldsFormComponent = ({ globalArray, index, filterGlobal, defa
       margin: "auto",
     },
     table: {
+      border: "2px solid rgb(224, 71, 76)",
       margin: "auto",
     },
     tableHeader: {
@@ -73,7 +74,10 @@ const SingleModelFieldsFormComponent = ({ globalArray, index, filterGlobal, defa
     <div style={styles.container}>
       <h1 style={styles.heading}>Model {index + 1}</h1>
       <form style={styles.form}>
-        <table style={styles.table}>
+        <table style={{
+          ...styles.table,
+          backgroundColor: "#f5f5f5",
+        }}>
           <thead>
             <tr>
               <td>
@@ -98,24 +102,9 @@ const SingleModelFieldsFormComponent = ({ globalArray, index, filterGlobal, defa
           </thead>
           <tbody>
             {fields.map((value, key) => {
-              return <TabelFormComponent key={key} value={value} index={key} fields={fields} setFields={setFields} />;
+              return <TabelFormComponent key={key} value={value} index={key} fields={fields} setFields={setFields} filterGlobal={filterGlobal} filterIndex={index} />;
             })}
           </tbody>
-          <tfoot>
-            <tr>
-              <td>
-                <button
-                  style={styles.saveButton}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    filterGlobal(index, fields);
-                  }}
-                >
-                  Save
-                </button>
-              </td>
-            </tr>
-          </tfoot>
         </table>
       </form>
     </div>
