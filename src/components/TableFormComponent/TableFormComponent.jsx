@@ -1,8 +1,147 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 const TabelFormComponent = (props) => {
   const { value, index, fields, setFields, filterGlobal, filterIndex } = props;
-
+  useEffect(() => {},[fields])
+  const  getInputType = () => {
+    switch (value.type.toUpperCase()) {
+      case 'STRING':
+        return 'text';
+      case 'INTEGER':
+      case 'TINYINT':
+      case 'SMALLINT':
+      case 'MEDIUMINT':
+      case 'BIGINT':
+      case 'UNSIGNED INTEGER':
+      case 'UNSIGNED BIGINT':
+        return 'number';
+      case 'UUID':
+      case 'UUIDV4':
+      case 'ENUM':
+      case 'BINARY':
+      case 'VARBINARY':
+      case 'BIT':
+      case 'CHAR':
+        return 'text';
+      case 'BOOLEAN':
+        return 'checkbox';
+      case 'DATE':
+      case 'DATEONLY':
+      case 'NOW':
+        return 'date';
+      case 'TEXT':
+        return 'textarea';
+      case 'FLOAT':
+      case 'DOUBLE':
+      case 'DECIMAL':
+      case 'REAL':
+      case 'DOUBLE PRECISION':
+        return 'number';
+      case 'BLOB':
+      case 'JSON':
+      case 'JSONB':
+      case 'HSTORE':
+        return 'string';
+      case 'GEOMETRY':
+      case 'GEOGRAPHY':
+        return 'text';
+      case 'CIDR':
+      case 'INET':
+      case 'MACADDR':
+        return 'text';
+      case 'RANGE':
+        return 'range';
+      default:
+        return 'text';
+    }
+  }
+  const getPlaceholder = () => {
+    switch (value.type.toUpperCase()) {
+      case 'STRING':
+        return 'Enter a string';
+      case 'INTEGER':
+      case 'TINYINT':
+      case 'SMALLINT':
+      case 'MEDIUMINT':
+      case 'BIGINT':
+      case 'UNSIGNED INTEGER':
+      case 'UNSIGNED BIGINT':
+        return 'Enter an integer';
+      case 'UUID':
+        return 'Enter a UUID';
+      case 'UUIDV4':
+        return 'Enter a UUIDv4';
+      case 'ENUM':
+      case 'ARRAY':
+        return 'Enter an option or array';
+      case 'BOOLEAN':
+        return 'Check or uncheck';
+      case 'DATE':
+        return 'Select a date';
+      case 'TEXT':
+        return 'Enter text';
+      case 'FLOAT':
+      case 'DOUBLE':
+      case 'DECIMAL':
+        return 'Enter a decimal number';
+      case 'BLOB':
+        return 'Select a file (BLOB)';
+      case 'VIRTUAL':
+        return 'Enter a virtual value';
+      case 'JSON':
+        return 'Enter JSON data';
+      case 'JSONB':
+        return 'Enter JSONB data';
+      case 'GEOMETRY':
+        return 'Enter a geometry';
+      case 'GEOGRAPHY':
+        return 'Enter a geography';
+      case 'CIDR':
+        return 'Enter a CIDR value';
+      case 'INET':
+        return 'Enter an INET value';
+      case 'MACADDR':
+        return 'Enter a MAC address';
+      case 'RANGE':
+        return 'Enter a range';
+      case 'REAL':
+      case 'DOUBLE PRECISION':
+        return 'Enter a real number';
+      case 'TIME':
+        return 'Enter a time';
+      case 'TINYINT':
+        return 'Enter a tiny integer';
+      case 'SMALLINT':
+        return 'Enter a small integer';
+      case 'MEDIUMINT':
+        return 'Enter a medium integer';
+      case 'BIGINT':
+        return 'Enter a big integer';
+      case 'UNSIGNED INTEGER':
+        return 'Enter an unsigned integer';
+      case 'UNSIGNED BIGINT':
+        return 'Enter an unsigned big integer';
+      case 'ZEROFILL':
+        return 'Enter a zerofill value';
+      case 'BINARY':
+        return 'Enter a binary value';
+      case 'VARBINARY':
+        return 'Enter a varbinary value';
+      case 'BIT':
+        return 'Enter a bit';
+      case 'CHAR':
+        return 'Enter a char';
+      case 'DATEONLY':
+        return 'Select a date only';
+      case 'HSTORE':
+        return 'Enter Hstore data';
+      case 'NOW':
+        return 'Enter the current date and time';
+      default:
+        return '';
+    }
+  }
+  
   const fieldChangeHandler = (e, key) => {
     const { name, type, value, checked } = e.target;
     let data = [...fields];
@@ -85,7 +224,7 @@ const TabelFormComponent = (props) => {
         <input name="unique" type="checkbox" checked={value.unique} onChange={(e) => fieldChangeHandler(e, index)} />
       </td>
       <td>
-        <input name="default" type="text" value={value.default} onChange={(e) => fieldChangeHandler(e, index)} style={styles.input} />
+        <input name="default" type={getInputType()} value={value.default}  onChange={(e) => fieldChangeHandler(e, index)} style={styles.input} placeholder={getPlaceholder()} />
       </td>
       {fields.length > 1 && (
         <>
