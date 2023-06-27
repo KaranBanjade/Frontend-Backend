@@ -29,7 +29,7 @@ const CreateProjectPage = () => {
     console.log("Data\n", data);
     setDatabaseSettings(data.connObj);
     setModels(data.models.map(model => model.name));
-    setGlobalArray(data.models.map(model => Object.entries(model.fieldsObject).map(field => ({ name: field[0], type: field[1].type, required: field[1].allowNull === "false", unique: field[1].primaryKey === "true", default: field[1].defaultValue }))));
+    setGlobalArray(data.models.map(model => Object.entries(model.fieldsObject).map(field => ({ name: field[0], type: field[1].type, allowNull: field[1].allowNull, unique: field[1].unique, default: field[1].defaultValue }))));
   };
   const DownloadProject = (data) => {
     console.log(databaseSettings)
@@ -84,7 +84,7 @@ const CreateProjectPage = () => {
       model.forEach(field => {
         fieldsObject[field.name] = {
           type: field.type,
-          allowNull: field.required,
+          allowNull: field.allowNull,
           primaryKey: field.primary,
           unique: field.unique,
           defaultValue: field.default,
@@ -116,7 +116,7 @@ const CreateProjectPage = () => {
   };
 
   const defaultGlobal = () => {
-    setGlobalArray(prev => [...prev, [{ name: "", type: "String", required: false, unique: false, default: "" }]]);
+    setGlobalArray(prev => [...prev, [{ name: "", type: "String", allowNull: false, unique: false, default: "" }]]);
   };
 
   const handleNext = () => {

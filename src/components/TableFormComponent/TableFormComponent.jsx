@@ -218,7 +218,7 @@ const TabelFormComponent = (props) => {
         </select>
       </td>
       <td>
-        <input name="required" type="checkbox" checked={value.required} onChange={(e) => fieldChangeHandler(e, index)} />
+        <input name="allowNull" type="checkbox" checked={value.allowNull} onChange={(e) => fieldChangeHandler(e, index)} />
       </td>
       <td>
         <input name="unique" type="checkbox" checked={value.unique} onChange={(e) => fieldChangeHandler(e, index)} />
@@ -240,7 +240,7 @@ const TabelFormComponent = (props) => {
         <button onClick={(e) => {
           e.preventDefault();
           const newData = [...fields];
-          newData.splice(index + 1, 0, { name: '', type: 'String', required: false, unique: false, default: '' });
+          newData.splice(index + 1, 0, { name: '', type: 'String', allowNull: false, unique: false, default: '' });
           setFields(newData);
         }} style={styles.button}>+</button>
       </td>

@@ -1,6 +1,7 @@
 import React from "react";
 import "./SubmitComponent.css";
 const SubmitComponent = ({ projectSettings, databaseSettings, globalArray,models }) => {
+  console.log(globalArray)
   return (
     <div className="submit-component">
       <table className="submit-table" style={{
@@ -107,7 +108,7 @@ const SubmitComponent = ({ projectSettings, databaseSettings, globalArray,models
                     </tr>
                     <tr>
                       <td><strong>Field Required:</strong></td>
-                      <td>{field.required.toString()}</td>
+                      <td>{field.allowNull.toString()}</td>
                     </tr>
                     <tr>
                       <td><strong>Field Unique:</strong></td>

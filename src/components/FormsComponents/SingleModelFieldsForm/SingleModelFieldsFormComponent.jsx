@@ -11,7 +11,7 @@ const SingleModelFieldsFormComponent = ({ globalArray, index, filterGlobal, defa
     if (globalArray[index] !== undefined) {
       setFields([...globalArray[index]]);
     } else {
-      setFields([{ name: "", type: "", required: true, unique: false, default: "" }]);
+      setFields([{ name: "", type: "", allowNull: true, unique: false, default: "" }]);
       defaultGlobal();
     }
   }, [globalArray, index, models]);
